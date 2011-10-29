@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+$LOAD_PATH.unshift File.join(File.dirname(__FILE__), '..', 'lib')
+
+require 'rubygems'
+require 'rgovdata'
+require 'getoptions'
+
+begin
+  Rgovdata::Shell.new(GetOptions.new(Rgovdata::Shell::OPTIONS)).run
+rescue Exception => e
+  STDERR.puts e
+end

@@ -1,5 +1,6 @@
 source "http://rubygems.org"
-gem "rake", '~> 0.9.2.2'
+
+gem "getoptions", "~> 0.3"
 
 group :development do
   gem "bundler", "~> 1.0.0"
@@ -9,5 +10,6 @@ group :development do
 end
 
 group :development, :test do
+  gem "rake", '~> 0.9.2.2'
   gem 'rspec', '~> 2.7.0', :require => 'spec'
 end
