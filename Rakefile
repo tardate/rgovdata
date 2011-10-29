@@ -10,11 +10,17 @@ rescue Bundler::BundlerError => e
   exit e.status_code
 end
 require 'rake'
+require 'rspec'
+require 'rspec/core/rake_task'
+
+$LOAD_PATH.unshift('lib')
+require 'rgovdata/version'
 
 require 'jeweler'
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
   gem.name = "rgovdata"
+  gem.version = Rgovdata::Version::STRING
   gem.homepage = "http://github.com/tardate/rgovdata"
   gem.license = "MIT"
   gem.summary = %Q{TODO: one-line summary of your gem}
@@ -25,29 +31,18 @@ Jeweler::Tasks.new do |gem|
 end
 Jeweler::RubygemsDotOrgTasks.new
 
-require 'rake/testtask'
-Rake::TestTask.new(:test) do |test|
-  test.libs << 'lib' << 'test'
-  test.pattern = 'test/**/test_*.rb'
-  test.verbose = true
+RSpec::Core::RakeTask.new do |t|
+  t.rspec_opts = ["-c", "-f progress"]
+  t.pattern = 'spec/**/*_spec.rb'
 end
 
-require 'rcov/rcovtask'
-Rcov::RcovTask.new do |test|
-  test.libs << 'test'
-  test.pattern = 'test/**/test_*.rb'
-  test.verbose = true
-  test.rcov_opts << '--exclude "gems/*"'
-end
+task :default => :spec
 
-task :default => :test
-
-require 'rake/rdoctask'
-Rake::RDocTask.new do |rdoc|
-  version = File.exist?('VERSION') ? File.read('VERSION') : ""
-
+require 'rdoc/task'
+RDoc::Task.new do |rdoc|
+  rdoc.main = "README.rdoc"
   rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "rgovdata #{version}"
-  rdoc.rdoc_files.include('README*')
-  rdoc.rdoc_files.include('lib/**/*.rb')
+  rdoc.title = "rgovdata #{Rgovdata::Version::STRING}"
+  rdoc.rdoc_files.include("README.rdoc", "lib/**/*.rb")
 end
+

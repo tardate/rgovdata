@@ -42,7 +42,7 @@ pkg
 #*.swp
 
 # For redcar:
-#.redcar
+.redcar
 
 # For rubinius:
 #*.rbc
