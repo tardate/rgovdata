@@ -8,7 +8,7 @@ license:
 uri: https://api.projectnimbus.org/nlbodataservice.svc
 type: :odata
 transport: :odata
-credentials: projectnimbus
+credentialset: projectnimbus
 --- !ruby/object:Rgovdata::ServiceListing
 realm: sg
 key: lta
@@ -19,7 +19,7 @@ license:
 uri: https://api.projectnimbus.org/nlbodataservice.svc
 type: :odata
 transport: :odata
-credentials: projectnimbus
+credentialset: projectnimbus
 --- !ruby/object:Rgovdata::ServiceListing
 realm: sg
 key: caas_air_cargo_discharged

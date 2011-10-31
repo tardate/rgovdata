@@ -6,7 +6,7 @@ describe RGovData::ServiceListing do
     subject { RGovData::ServiceListing.new }
     [
       :realm,:key,:name,:description,:keywords,:publisher,
-      :uri,:license,:type,:transport,:credentials
+      :uri,:license,:type,:transport,:credentialset
     ].each do |property|
       describe property do
         it "should support setter and getter" do

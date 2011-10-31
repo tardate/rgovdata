@@ -12,14 +12,14 @@ class RGovData::ServiceListing
   attr_accessor :uri           # url to the service interface
   attr_accessor :type          # service type [:odata,:csv]
   attr_accessor :transport     # transport mechanism [:odata,:get]
-  attr_accessor :credentials   # name of the credential set required
+  attr_accessor :credentialset # name of the credential set required
 
   def as_param
     "//#{realm}/#{key}"
   end
 
   def service
-    @service ||= RGovData::Service.get_instance(uri,type,transport)
+    @service ||= RGovData::Service.get_instance(uri,type,transport,credentialset)
   end
 
 end

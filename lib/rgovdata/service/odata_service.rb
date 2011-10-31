@@ -1,3 +1,4 @@
+require 'ruby_odata'
 class RGovData::ODataService < RGovData::Service
 
 end
