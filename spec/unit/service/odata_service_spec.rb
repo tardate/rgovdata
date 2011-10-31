@@ -16,11 +16,9 @@ describe RGovData::ODataService do
     context "with basic credentials" do
       subject { service.native_instance.instance_variable_get(:@rest_options) }
       it "should have user set" do
-        puts subject
         subject[:user].should_not be_nil
       end
       it "should have password set" do
-        puts subject
         subject[:password].should_not be_nil
       end
     end
@@ -28,7 +26,6 @@ describe RGovData::ODataService do
       let(:credentialset) { 'projectnimbus' }
       subject { service.native_instance.instance_variable_get(:@rest_options) }
       it "should have headers set" do
-        puts subject
         subject[:headers].should_not be_nil
       end
     end

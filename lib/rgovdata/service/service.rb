@@ -1,6 +1,8 @@
 # A ServiceListing is the metadata describing a specific service
 # It encapsulates access to the underlying service
 class RGovData::Service
+  include RGovData::CommonConfig
+
   attr_reader :uri,:type,:transport,:credentialset
   attr_reader :native_instance    # the underlying native service object (if applicable)
 

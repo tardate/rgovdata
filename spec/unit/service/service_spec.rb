@@ -18,6 +18,9 @@ describe RGovData::Service do
   end
   
   let(:service) { RGovData::Service.new('uri','csv','get','credentialset') }
+  subject { service }
+  
+  it_behaves_like "includes common config"
 
   describe "#native_instance" do
     subject { service.native_instance }
