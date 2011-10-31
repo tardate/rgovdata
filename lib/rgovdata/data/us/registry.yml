@@ -1,5 +1,5 @@
---- !ruby/object:Rgovdata::ServiceListing
-realm: us
+--- !ruby/object:RGovData::ServiceListing
+realm: :us
 key: eqs7day-M1
 name: "Worldwide M1+ Earthquakes, Past 7 Days"
 description: "Real-time, worldwide earthquake list for the past 7 days"
