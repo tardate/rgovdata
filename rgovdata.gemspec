@@ -15,15 +15,16 @@ Gem::Specification.new do |s|
   s.email = %q{gallagher.paul@gmail.com}
   s.executables = ["rgd"]
   s.extra_rdoc_files = [
-    "LICENSE.txt",
+    "LICENSE",
     "README.rdoc"
   ]
   s.files = [
     ".document",
     ".rvmrc",
+    "CHANGELOG",
     "Gemfile",
     "Gemfile.lock",
-    "LICENSE.txt",
+    "LICENSE",
     "README.rdoc",
     "Rakefile",
     "bin/rgd",

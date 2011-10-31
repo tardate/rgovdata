@@ -1,20 +1,79 @@
-= rgovdata
+= RGovData
+
+RGovData is a ruby library for really simple access to government data.
+It aims to make consuming government data sets as easy as "gem install rgovdata",
+letting you focus on what you are trying to achieve with the data, and happily
+ignore all the messy underlying details of transport protocols, authentication and so on.
+
+It can be used as a command line tool, a library of ruby projects,
+and/or a library for rails projects.
+The problem it is attempting to solve is
+
+More information is available at
+link:http://rgovdata.com
+along with some examples of it's use.
+
+Taking on the challenge of providing access to "all government data" is a somewhat quixotic quest
+for a single individual, but it could work with a community to support it!
+The library is open sourced under an MIT license, and the project hosted on
+{github}[https://github.com/tardate/rgovdata]. If you'd like to get involved, see the
+"Contributing to RGovData" section below.
+
+== Requirements
+
+* ruby 1.9
+* optional: rails 3.0.x
+
+== Objectives and Implementation Status
+
+The following are the broad goals of the RGovData library, along with a simple statement of the
+current implementation status:
+
+* Support for discovery of data sets [status: limited to an internal registry at present.
+  But it has a framework for adding discovery services as and when they are available ]
+* Support all countries that are actively publishing government data sets [status: very limited;
+  currently just supporting some examples from SG and US]
+* Support the range of data formats used in government data sets [status: currently limited to CSV and OData,
+  but with a framework to add more when available ]
+* Command line tool for discovery and access to data [status: basic features available]
+* Provide a common abstraction and simple API for data discovery and access from ruby projects [status: implemented]
+* Provide specific support for Rails ORM technologies (ActiveModel/ActiveRecord/ActiveResource) to
+  make it easy and natural to use in Rails proejcts [status: no specific support yet, however the base ruby API works fine in Rails]
+* Provide a transparent caching mechanism for non-realtime data sets (e.g. csv files) [status: not yet implemented. If you
+  require caching or batch downloading, it is something you currently must implement yourself]
+
+Note that the current version is a very early implementation. It is likely that interfaces
+and capabilities may be refactored or changed in subsequent versions, and not necessarily preserving
+backward compatibility.
+
+== Getting Started
+
+For more details, see
+link:http://rgovdata.com
+
+The basics:
 
 
-Description goes here.
+== Data Encumberance
 
-== Contributing to rgovdata
+Although it's all theoretically "our government data", be aware that many of the data sets you
+can get to with RGovData are encumbered by copyright, commercial or other terms of use (yes, I know: wtf!).
+
+It is up to *you* to ensure that your use of data complies with all the applicable restrictions.
+RGovData simply provides a mechanism for getting the data, and explicitly does not provide any rights
+enforcement or protection.
+
+== Contributing to RGovData
  
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
 * Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it
 * Fork the project
 * Start a feature/bugfix branch
 * Commit and push until you are happy with your contribution
-* Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
-* Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
+* Make sure to add tests for it. This is important so your changes don't get unintentionally broken in a future version.
+* Please try not to mess with the Rakefile, version, gemspec or changelog. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so the mater repository maintainer can cherry-pick around it.
 
 == Copyright
 
-Copyright (c) 2011 Paul Gallagher. See LICENSE.txt for
-further details.
-
+Copyright (c) 2011 Paul Gallagher and open-sourced under an MIT license.
+See LICENSE for further details.
