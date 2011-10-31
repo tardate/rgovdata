@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe Rgovdata::Catalog do
+describe RGovData::Catalog do
 
   supported_realms.each do |realm|
     context "with realm #{realm}" do
-      let(:catalog) { Rgovdata::Catalog.new(realm) }
+      let(:catalog) { RGovData::Catalog.new(realm) }
       subject { catalog }
       its(:realm) { should eql(realm) }
       describe "#services" do
@@ -15,7 +15,7 @@ describe Rgovdata::Catalog do
   end
 
   describe "#realms" do
-    let(:catalog) { Rgovdata::Catalog.new }
+    let(:catalog) { RGovData::Catalog.new }
     its(:realms) { should be_a(Array) }
     supported_realms.each do |realm|
       its(:realms) { should include(realm) }

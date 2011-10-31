@@ -1,4 +1,4 @@
-class Rgovdata::Shell
+class RGovData::Shell
   attr_accessor :options
 
   # command line options definition
@@ -7,7 +7,7 @@ class Rgovdata::Shell
   def self.usage
     puts <<-EOS
 
-rgovdata client v#{Rgovdata::Version::STRING}
+rgovdata client v#{RGovData::Version::STRING}
 ===================================
 
 Usage:
@@ -60,7 +60,7 @@ Usage:
   def welcome(*args)
     puts <<-EOS
 
-rgovdata client v#{Rgovdata::Version::STRING}. Type 'help' for info...
+rgovdata client v#{RGovData::Version::STRING}. Type 'help' for info...
     EOS
   end
 

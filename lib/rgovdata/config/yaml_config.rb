@@ -1,6 +1,6 @@
 require 'yaml'
 
-class Rgovdata::YamlConfig
+class RGovData::YamlConfig
   attr_reader :filename, :config
   class UninitializedValueError < StandardError
 	end

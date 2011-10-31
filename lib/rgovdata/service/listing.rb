@@ -1,6 +1,6 @@
 # A ServiceListing is the metadata describing a specific service
 # It encapsulates access to the underlying service
-class Rgovdata::ServiceListing
+class RGovData::ServiceListing
   attr_accessor :realm         # realm for the service
   attr_accessor :key           # unique service name or id (within realm)
   attr_accessor :name          # human name of the service

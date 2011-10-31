@@ -1,4 +1,4 @@
-module Rgovdata
+module RGovData
   class Version
     MAJOR = 0
     MINOR = 1

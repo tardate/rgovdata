@@ -1,17 +1,17 @@
 require 'spec_helper'
 
-describe Rgovdata::Config do
+describe RGovData::Config do
 
   describe "##default_config_file" do
-    subject { Rgovdata::Config }
-    its(:default_config_file) { should match(Rgovdata::Config::BASE_NAME) }
+    subject { RGovData::Config }
+    its(:default_config_file) { should match(RGovData::Config::BASE_NAME) }
     it "should accept override parameter" do
       subject.default_config_file('foo').should match(/foo/)
     end
   end
 
   describe "##template" do
-    subject { Rgovdata::Config.template }
+    subject { RGovData::Config.template }
     it { should be_a(String) }
   end
 
@@ -22,13 +22,13 @@ describe Rgovdata::Config do
     end
     it "should not generate template file if auto-generation not enabled" do
       expect {
-        Rgovdata::Config.new(temp_config_file,false)
-      }.to raise_error(Rgovdata::Config::ConfigurationFileNotFound)
+        RGovData::Config.new(temp_config_file,false)
+      }.to raise_error(RGovData::Config::ConfigurationFileNotFound)
     end
     it "should generate template file if auto-generation is enabled" do
       expect {
-        Rgovdata::Config.new(temp_config_file)
-      }.to raise_error(Rgovdata::Config::ConfigurationFileInitialized)
+        RGovData::Config.new(temp_config_file)
+      }.to raise_error(RGovData::Config::ConfigurationFileInitialized)
       File.exists?(temp_config_file).should be_true
     end
   end

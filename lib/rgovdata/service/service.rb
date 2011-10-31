@@ -1,6 +1,6 @@
 # A ServiceListing is the metadata describing a specific service
 # It encapsulates access to the underlying service
-class Rgovdata::Service
+class RGovData::Service
   attr_reader :uri,:type,:transport
 
   class << self
@@ -9,9 +9,9 @@ class Rgovdata::Service
     def get_instance(uri,type,transport)
       case type
       when :odata
-        Rgovdata::OdataService.new(uri,type,transport)
+        RGovData::OdataService.new(uri,type,transport)
       when :csv
-        Rgovdata::CsvService.new(uri,type,transport)
+        RGovData::CsvService.new(uri,type,transport)
       else # not a supported type
         nil
       end

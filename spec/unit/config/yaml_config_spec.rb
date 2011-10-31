@@ -2,10 +2,10 @@ require 'spec_helper'
 require 'support/mocks'
 include MocksHelper
 
-describe Rgovdata::YamlConfig do
+describe RGovData::YamlConfig do
   let(:filename) { 'config.yml' }
   let(:file_source) { mock_text(filename) }
-  let(:yaml_config) { Rgovdata::YamlConfig.new(filename) }
+  let(:yaml_config) { RGovData::YamlConfig.new(filename) }
   subject { yaml_config }
   before do
     File.stub(:read).and_return(file_source)

@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe Rgovdata::ServiceListing do
+describe RGovData::ServiceListing do
 
   describe "property:" do
-    subject { Rgovdata::ServiceListing.new }
+    subject { RGovData::ServiceListing.new }
     [
       :realm,:key,:name,:description,:keywords,:publisher,
       :uri,:license,:type,:transport,:credentials

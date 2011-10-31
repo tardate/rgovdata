@@ -6,7 +6,7 @@ require 'rgovdata'
 require 'getoptions'
 
 begin
-  Rgovdata::Shell.new(GetOptions.new(Rgovdata::Shell::OPTIONS)).run
+  RGovData::Shell.new(GetOptions.new(RGovData::Shell::OPTIONS)).run
 rescue Exception => e
   STDERR.puts e
 end

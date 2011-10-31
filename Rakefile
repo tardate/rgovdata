@@ -20,7 +20,7 @@ require 'jeweler'
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
   gem.name = "rgovdata"
-  gem.version = Rgovdata::Version::STRING
+  gem.version = RGovData::Version::STRING
   gem.homepage = "http://github.com/tardate/rgovdata"
   gem.license = "MIT"
   gem.summary = %Q{Really simple access to government data for ruby}
@@ -42,7 +42,7 @@ require 'rdoc/task'
 RDoc::Task.new do |rdoc|
   rdoc.main = "README.rdoc"
   rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "rgovdata #{Rgovdata::Version::STRING}"
+  rdoc.title = "rgovdata #{RGovData::Version::STRING}"
   rdoc.rdoc_files.include("README.rdoc", "lib/**/*.rb")
 end
 

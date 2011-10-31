@@ -1,4 +1,4 @@
-class Rgovdata::Catalog
+class RGovData::Catalog
   attr_accessor :realm
   
   def initialize(default_realm=nil)
@@ -24,7 +24,7 @@ class Rgovdata::Catalog
 
   # Returns the registry strategy class for the current realm
   def registry_strategy
-    Rgovdata::RegistryStrategy.instance_for_realm(realm)
+    RGovData::RegistryStrategy.instance_for_realm(realm)
   end
   protected :registry_strategy
 

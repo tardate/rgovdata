@@ -2,7 +2,7 @@ require 'pathname'
 
 # This is a convenience class for accessing disk-based template files
 # It avoids pathname processing from being required where template are used
-class Rgovdata::Template
+class RGovData::Template
   
   class << self
     # Returns the template file content

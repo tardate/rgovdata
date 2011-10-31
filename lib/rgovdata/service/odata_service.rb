@@ -1,4 +1,4 @@
-class Rgovdata::OdataService < Rgovdata::Service
+class RGovData::OdataService < RGovData::Service
 
 end
 

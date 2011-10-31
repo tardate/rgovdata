@@ -1,12 +1,12 @@
 require 'spec_helper'
 
-describe Rgovdata::RegistryStrategy do
+describe RGovData::RegistryStrategy do
   {
-    :sg => {:class => Rgovdata::InternalRegistry}
+    :sg => {:class => RGovData::InternalRegistry}
   }.each do |realm,options|
     context "with realm #{realm}" do
       describe "##instance_for_realm" do
-        subject { Rgovdata::RegistryStrategy.instance_for_realm(realm) }
+        subject { RGovData::RegistryStrategy.instance_for_realm(realm) }
         it { should be_a(options[:class]) }
         its(:realm) { should eql(realm) }
         its(:load_services) { should be_a(Array) }
@@ -15,13 +15,13 @@ describe Rgovdata::RegistryStrategy do
   end
 
   describe "#load_services" do
-    subject { Rgovdata::RegistryStrategy.new.load_services}
+    subject { RGovData::RegistryStrategy.new.load_services}
     it { should eql([]) }
   end
 
   describe "#realm" do
     let(:realm) { :xy }
-    subject { Rgovdata::RegistryStrategy.new(realm) }
+    subject { RGovData::RegistryStrategy.new(realm) }
     its(:realm) { should eql(realm) }
   end
 

@@ -1,4 +1,4 @@
-class Rgovdata::RegistryStrategy
+class RGovData::RegistryStrategy
   attr_accessor :realm
 
   class << self
@@ -9,7 +9,7 @@ class Rgovdata::RegistryStrategy
       # e.g by default we will look for a class called Rgovdata::<realm>Registry (Rgovdata::ZhRegistry)
       # else we take the default strategy
       # Currently this just defaults to internal registry:
-      Rgovdata::InternalRegistry.new(realm)
+      RGovData::InternalRegistry.new(realm)
     end
   end
 

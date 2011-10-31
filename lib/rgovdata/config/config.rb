@@ -1,4 +1,4 @@
-class Rgovdata::Config < Rgovdata::YamlConfig
+class RGovData::Config < RGovData::YamlConfig
   BASE_NAME = 'rgovdata.conf'
 
   class ConfigError < StandardError

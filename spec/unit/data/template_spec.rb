@@ -1,8 +1,9 @@
 require 'spec_helper'
 
-describe Rgovdata::Template do
-  subject { Rgovdata::Template }
+describe RGovData::Template do
+  subject { RGovData::Template }
   it { should respond_to(:get) }
+
   [
     { :name => 'config_template.yml', :realm => nil, :expect => 'credentials'},
     { :name => 'registry.yml', :realm => 'sg', :expect => 'description'},
@@ -11,7 +12,7 @@ describe Rgovdata::Template do
     { :name => 'not_found.yml', :realm => nil, :expect => nil}
   ].each do |options|
     context "with #{options[:realm]}:#{options[:name]}" do
-      subject { Rgovdata::Template.get(options[:name],options[:realm]) }
+      subject { RGovData::Template.get(options[:name],options[:realm]) }
       if options[:expect]
         it { should include(options[:expect]) }
       else

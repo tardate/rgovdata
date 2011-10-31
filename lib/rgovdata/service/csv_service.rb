@@ -1,3 +1,3 @@
-class Rgovdata::CsvService < Rgovdata::Service
+class RGovData::CsvService < RGovData::Service
 
 end
