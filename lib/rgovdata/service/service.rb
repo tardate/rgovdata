@@ -5,11 +5,13 @@ class RGovData::Service
 
   class << self
     # Returns the appropriate Service class for the given uri and type
-    # +realm+ is the required realm
+    # +uri+ is the uri (string)
+    # +type+
+    # +transport+
     def get_instance(uri,type,transport)
-      case type
+      case type && type.to_sym
       when :odata
-        RGovData::OdataService.new(uri,type,transport)
+        RGovData::ODataService.new(uri,type,transport)
       when :csv
         RGovData::CsvService.new(uri,type,transport)
       else # not a supported type
