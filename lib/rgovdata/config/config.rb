@@ -1,4 +1,6 @@
-class RGovData::Config < RGovData::YamlConfig
+require 'singleton'
+class RGovData::Config
+  include Singleton
   BASE_NAME = 'rgovdata.conf'
 
   class ConfigError < StandardError
@@ -8,9 +10,9 @@ class RGovData::Config < RGovData::YamlConfig
   class ConfigurationFileInitialized < ConfigError
 	end
 	
-  def initialize(configfilepath, generate_default_if_not_found = true)
+  def load_config(configfilepath, generate_default_if_not_found = true)
     unless File.exists?(configfilepath)
-      reset_configfile(configfilepath) if generate_default_if_not_found
+      self.class.reset_configfile(configfilepath) if generate_default_if_not_found
       if File.exists?(configfilepath)
         raise ConfigurationFileInitialized.new("\n
 No configuration file found.
@@ -20,24 +22,29 @@ Please review the configuration and retry..\n\n\n")
         raise ConfigurationFileNotFound.new("cannot load config file #{configfilepath}")
       end
     end
-    super(configfilepath)
+    # super(configfilepath)
   end
-  
-  def reset_configfile(configfilepath)
-    file = File.new(configfilepath,'w')
-    self.class.template.each_line do | line|
-      file.puts line
-    end
-    file.close
+
+  # Clears the current configuration
+  def clear
+    
   end
   
   class << self
+    def reset_configfile(configfilepath)
+      file = File.new(configfilepath,'w')
+      template.each_line do | line|
+        file.puts line
+      end
+      file.close
+    end
+
     def default_config_file(override = nil)
       File.expand_path(override || BASE_NAME)
     end
     
     def template
-      IO.read("#{File.dirname(__FILE__)}/../data/config_template.yml")
+      RGovData::Template.get('config_template.yml')
     end
   end
   

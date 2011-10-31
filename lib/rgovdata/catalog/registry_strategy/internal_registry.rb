@@ -1,5 +1,5 @@
 class RGovData::InternalRegistry < RGovData::RegistryStrategy
-  
+
   # Returns the list of services for the realm
   # based on internal yml file
   def load_services

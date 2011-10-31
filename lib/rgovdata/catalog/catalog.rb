@@ -1,6 +1,6 @@
 class RGovData::Catalog
   attr_accessor :realm
-  
+
   def initialize(default_realm=nil)
     @realm = default_realm
   end
