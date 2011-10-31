@@ -18,7 +18,7 @@ describe RGovData::ServiceListing do
     end
   end
 
-  describe "#as_param" do
+  describe "#id" do
     let(:realm) { :sg }
     let(:key) { 'key_name' }
     let(:expect) { '//sg/key_name' }
@@ -28,7 +28,7 @@ describe RGovData::ServiceListing do
       listing.realm = realm
       listing.key = key
     end
-    its(:as_param) { should eql(expect) }
+    its(:id) { should eql(expect) }
   end
 
   describe "#service" do
@@ -55,4 +55,36 @@ describe RGovData::ServiceListing do
       end
     end
   end
+
+  describe "#datasets" do
+    let(:listing) { RGovData::ServiceListing.new }
+    let(:mock_datasets) { ['a','b'] }
+    before {
+      RGovData::Service.stub(:get_instance).and_return(RGovData::Service.new('uri','type','transport','credentialset'))
+      RGovData::Service.any_instance.stub(:datasets).and_return(mock_datasets)
+    }
+    subject { listing.datasets }
+    it { should be_a(Array) }
+    it { should eql(mock_datasets) }
+    describe "#get_dataset" do
+      let(:key) { 'key' }
+      let(:mock_dataset_a) { 'mock_dataset_a' }
+      let(:mock_dataset_b) { 'mock_dataset_b' }
+      let(:mock_dataset) { [mock_dataset_a,mock_dataset_b] }
+      before {
+        RGovData::Service.any_instance.stub(:get_dataset).and_return(mock_dataset)
+      }
+      subject { listing.get_dataset(key) }
+      it { should eql(mock_dataset) }
+      describe "#find" do
+        subject { listing.find(key) }
+        it { should eql(mock_dataset_a) }
+      end
+      describe "#find_by_id" do
+        subject { listing.find_by_id(key) }
+        it { should eql(mock_dataset_a) }
+      end
+    end
+  end
+
 end

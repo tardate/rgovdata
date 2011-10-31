@@ -14,12 +14,28 @@ class RGovData::ServiceListing
   attr_accessor :transport     # transport mechanism [:odata,:get]
   attr_accessor :credentialset # name of the credential set required
 
-  def as_param
+  def id
     "//#{realm}/#{key}"
   end
 
   def service
     @service ||= RGovData::Service.get_instance(uri,type,transport,credentialset)
   end
+
+  # Returns an array of DataSets for the service
+  # => delegate to service
+  def datasets
+    service.try(:datasets)
+  end
+
+  # Returns the dataset(s) matching +key+
+  # => delegate to service
+  def get_dataset(key)
+    service.try(:get_dataset,key)
+  end
+  def find(id)
+    Array(get_dataset(id)).first
+  end
+  alias_method :find_by_id, :find
 
 end

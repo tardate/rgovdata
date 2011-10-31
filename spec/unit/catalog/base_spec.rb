@@ -23,7 +23,7 @@ describe RGovData::Catalog do
       it { should be_a(Array) }
       its(:first) { should be_a(RGovData::ServiceListing) }
     end
-    context "with single matche" do
+    context "with single match" do
       let(:key) { 'nlb' }
       it { should be_a(RGovData::ServiceListing) }
       its(:realm) { should eql(:sg) }

@@ -16,7 +16,10 @@ class RGovData::Catalog
       if keypart[1]
         found = catalog = self.new(keypart[1])
         if keypart[2]
-          found = catalog.get_service(keypart[2])
+          found = service = catalog.get_service(keypart[2])
+          if keypart[3]
+            found = service.get_dataset(keypart[3])
+          end
         end
       end
       found
@@ -37,8 +40,10 @@ class RGovData::Catalog
   def services
     @services ||= registry_strategy.load_services
   end
+
   # Returns the service(s) matching +key+
   def get_service(key)
+    return nil unless services && !services.empty?
     matches = services.select {|s| s.key =~ /#{key}/}
     matches.count == 1 ? matches.first : matches
   end
