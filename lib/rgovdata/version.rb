@@ -1,5 +1,5 @@
-class Rgovdata
-  module Version
+module Rgovdata
+  class Version
     MAJOR = 0
     MINOR = 1
     PATCH = 0

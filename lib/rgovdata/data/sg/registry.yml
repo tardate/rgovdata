@@ -1,0 +1,35 @@
+--- !ruby/object:Rgovdata::ServiceListing
+realm: sg
+key: nlb
+name: Libraries
+description: List and location of Public Libraries in Singapore
+keywords: library
+license:
+uri: https://api.projectnimbus.org/nlbodataservice.svc
+type: :odata
+transport: :odata
+credentials: projectnimbus
+--- !ruby/object:Rgovdata::ServiceListing
+realm: sg
+key: lta
+name: Libraries
+description: List and location of Public Libraries in Singapore
+keywords: library
+license:
+uri: https://api.projectnimbus.org/nlbodataservice.svc
+type: :odata
+transport: :odata
+credentials: projectnimbus
+--- !ruby/object:Rgovdata::ServiceListing
+realm: sg
+key: caas_air_cargo_discharged
+name: Air Cargo Discharged
+description: Air Cargo Discharged - Total by Region and Selected Country of Origin
+keywords: Transportation and Storage
+publisher: Civil Aviation Authority of Singapore
+license:
+uri: http://data.gov.sg/common/download.aspx?id=13008&rid=1805010000000004396B&filetype=csv
+type: :csv
+transport: :get
+
+

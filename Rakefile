@@ -23,8 +23,8 @@ Jeweler::Tasks.new do |gem|
   gem.version = Rgovdata::Version::STRING
   gem.homepage = "http://github.com/tardate/rgovdata"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{Really simple access to government data for ruby}
+  gem.description = %Q{Consuming government-published data in a ruby or rails application shouldn't require a PhD}
   gem.email = "gallagher.paul@gmail.com"
   gem.authors = ["Paul Gallagher"]
   # dependencies defined in Gemfile

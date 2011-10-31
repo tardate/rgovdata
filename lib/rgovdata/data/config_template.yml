@@ -1,0 +1,7 @@
+# Define the various credential sets that may be required
+credentials:
+  # http://projectnimbus.org - source of Singapore Government APIs
+  projectnimbus:
+    AccountKey: _insert_your_key_here_
+    UniqueUserID: "00000000000000000000000000000001"
+

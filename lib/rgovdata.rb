@@ -1,2 +1,5 @@
 require 'rgovdata/version'
 require 'rgovdata/shell/shell'
+require 'rgovdata/config'
+require 'rgovdata/service'
+require 'rgovdata/catalog'
