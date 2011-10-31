@@ -34,15 +34,21 @@ class RGovData::Service
   def attributes
   end
 
-  # Returns an array of DataSets for the service
+  # Returns an array of DataSets (names) for the service
   def datasets
-    
   end
 
   # Returns the dataset(s) matching +key+
   def get_dataset(key)
     return nil unless datasets && !datasets.empty?
-    matches = datasets.select {|s| s.key =~ /#{key}/}
+    matches = datasets.select {|s| s =~ /#{key}/}
     matches.count == 1 ? matches.first : matches
   end
+  # Returns the first dataset matching +key+
+  def find(id)
+    Array(get_dataset(id)).first
+  end
+  # Alias for find
+  alias_method :find_by_id, :find
+
 end

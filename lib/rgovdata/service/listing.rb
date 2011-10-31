@@ -33,9 +33,12 @@ class RGovData::ServiceListing
   def get_dataset(key)
     service.try(:get_dataset,key)
   end
+  # Returns the first dataset matching +key+
+  # => delegate to service
   def find(id)
-    Array(get_dataset(id)).first
+    service.try(:find,id)
   end
+  # Alias for find
   alias_method :find_by_id, :find
 
 end
