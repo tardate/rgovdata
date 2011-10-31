@@ -2,12 +2,14 @@
 # It encapsulates access to the underlying service
 class RGovData::Service
   attr_reader :uri,:type,:transport,:credentialset
+  attr_reader :native_instance    # the underlying native service object (if applicable)
 
   class << self
     # Returns the appropriate Service class for the given uri and type
     # +uri+ is the uri (string)
     # +type+
     # +transport+
+    # +credentialset+
     def get_instance(uri,type,transport,credentialset)
       case type && type.to_sym
       when :odata
@@ -26,7 +28,13 @@ class RGovData::Service
   # +transport+ transport mechanism selector: :odata, :get
   # +credentialset+
   def initialize(uri,type,transport,credentialset)
-    @uri,@type,@transport,@credentials = uri,type,transport,credentialset
+    @uri,@type,@transport,@credentialset = uri,type,transport,credentialset
+  end
+
+  # Returns the native service object if applicable
+  # By default, returns self
+  def native_instance
+    @native_instance || self
   end
 
   # Returns an Array of attributes supported by the service

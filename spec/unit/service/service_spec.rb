@@ -16,9 +16,15 @@ describe RGovData::Service do
       it { should be_a(RGovData::CsvService) }
     end
   end
+  
+  let(:service) { RGovData::Service.new('uri','csv','get','credentialset') }
+
+  describe "#native_instance" do
+    subject { service.native_instance }
+    it { should eql(service) }
+  end
 
   describe "#datasets" do
-    let(:service) { RGovData::Service.new('uri','csv','get','credentialset') }
     let(:mock_dataset_a) { 'mock_dataset_a' }
     let(:mock_dataset_b) { 'mock_dataset_b' }
     let(:mock_datasets) { [mock_dataset_a,mock_dataset_b] }
