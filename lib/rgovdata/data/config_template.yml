@@ -1,3 +1,7 @@
+
+# Defines the default realm (country)
+default_realm: sg
+
 # Define the various credential sets that may be required
 credentialsets:
   # Basic authentication credentials

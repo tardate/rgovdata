@@ -12,7 +12,7 @@ class RGovData::Config
   class ConfigurationFileInitialized < ConfigError
 	end
 
-  attr_accessor :credentialsets
+  attr_accessor :default_realm, :credentialsets
 
   def initialize
     clear
@@ -32,14 +32,22 @@ Please review the configuration and retry..\n\n\n")
         raise ConfigurationFileNotFound.new("cannot load config file #{configfilepath}")
       end
     end
-    config = OpenStruct.new(YAML::load(File.open(configfilepath,'r')))
-    @credentialsets.merge!(config.credentialsets)
+    update_settings(OpenStruct.new(YAML::load(File.read(configfilepath))))
+  end
+
+  # Updates attributes from config, including env override
+  # +config+ OpenStruct structure
+  def update_settings(config)
+    @credentialsets.merge!(config.credentialsets||{})
+    @default_realm = config.default_realm.to_sym if config.default_realm
     refresh_from_env
   end
+  protected :update_settings
 
   # Clears the current configuration
   def clear
     @credentialsets = {}
+    @default_realm = nil
   end
   
   # Sets environment overrides for supported settings
