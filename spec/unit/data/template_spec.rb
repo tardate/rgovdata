@@ -12,12 +12,21 @@ describe RGovData::Template do
     { :name => 'not_found.yml', :realm => nil, :expect => nil}
   ].each do |options|
     context "with #{options[:realm]}:#{options[:name]}" do
-      subject { RGovData::Template.get(options[:name],options[:realm]) }
-      if options[:expect]
-        it { should include(options[:expect]) }
-      else
-        it { should be_nil }
+
+      describe "##path" do
+        subject { RGovData::Template.path(options[:name],options[:realm]) }
+        it { File.exists?(subject).should == options[:expect].present? }
       end
+
+      describe "##get" do
+        subject { RGovData::Template.get(options[:name],options[:realm]) }
+        if options[:expect]
+          it { should include(options[:expect]) }
+        else
+          it { should be_nil }
+        end
+      end
+
     end
   end
 end

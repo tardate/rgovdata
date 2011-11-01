@@ -1,7 +1,15 @@
 # Define the various credential sets that may be required
-credentials:
-  # http://projectnimbus.org - source of Singapore Government APIs
+credentialsets:
+  # Basic authentication credentials
+  basic:
+    # ENV['rgovdata_username'] will override username if present
+    username: "_insert_your_username_here_"
+    # ENV['rgovdata_password'] will override password if present
+    password: "your_password"
+  # OData credentials for http://projectnimbus.org - APIs for Singapore Government Data
   projectnimbus:
-    AccountKey: _insert_your_key_here_
+    # ENV['projectnimbus_account_key'] will override AccountKey if present
+    AccountKey: "_insert_your_key_here_"
+    # ENV['projectnimbus_unique_user_id'] will override UniqueUserID if present
     UniqueUserID: "00000000000000000000000000000001"
 
