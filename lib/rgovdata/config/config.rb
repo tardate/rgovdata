@@ -1,4 +1,6 @@
+require 'ostruct'
 require 'singleton'
+
 class RGovData::Config
   include Singleton
   BASE_NAME = 'rgovdata.conf'
@@ -30,8 +32,8 @@ Please review the configuration and retry..\n\n\n")
         raise ConfigurationFileNotFound.new("cannot load config file #{configfilepath}")
       end
     end
-    config = RGovData::YamlConfig.new(configfilepath)
-    @credentialsets.merge!(config.config["credentialsets"])
+    config = OpenStruct.new(YAML::load(File.open(configfilepath,'r')))
+    @credentialsets.merge!(config.credentialsets)
     refresh_from_env
   end
 
