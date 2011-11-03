@@ -13,6 +13,9 @@ module RGovData::Dn
     nameparts.push(dataset_key) if defined?(dataset_key) && dataset_key.present?
     nameparts.join('/')
   end
+  def to_param
+    id.gsub('/',':')
+  end
 
   # Returns the human version of the object
   def to_s

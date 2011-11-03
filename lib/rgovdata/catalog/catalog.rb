@@ -13,6 +13,7 @@ class RGovData::Catalog
     # //sg/nlb/Library - will return RGovData::OdataService for the nlb Library service in SG
     def get(key)
       key ||= '//'
+      key.gsub!(':','/') # handle alternate encoding
       keypart = Regexp.new(/(?:\/\/([^\/]+))?(?:\/([^\/]+))?(?:\/([^\/]+))?/).match(key)
       found = catalog = self.new(keypart[1])
       if keypart[2]

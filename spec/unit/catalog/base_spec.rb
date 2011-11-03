@@ -77,9 +77,11 @@ describe RGovData::Catalog do
       its(:realm) { should be_nil }
     end
     context "with realm only" do
-      let(:key) { '//sg' }
-      it { should be_a(RGovData::Catalog) }
-      its(:realm) { should eql(:sg) }
+      ['//sg','::sg'].each do |key_test|
+        let(:key) { key_test}
+        it { should be_a(RGovData::Catalog) }
+        its(:realm) { should eql(:sg) }
+      end
     end
     context "with realm and service" do
       let(:key) { '//sg/nlb' }

@@ -1,6 +1,7 @@
 source 'http://rubygems.org'
 
-gem 'rails', '= 3.0.7'
+gem 'activesupport', '>= 3.0.3'
+gem 'i18n', '>= 0.5.0'
 gem 'ruby_odata', '~> 0.0.10'
 gem 'getoptions', '~> 0.3'
 
