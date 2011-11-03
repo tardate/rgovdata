@@ -1,8 +1,9 @@
 class RGovData::Shell
-  attr_accessor :options
+  include RGovData::CommonConfig
+  attr_accessor :options, :prompt
 
   # command line options definition
-  OPTIONS = %w(help verbose)
+  OPTIONS = %w(help verbose command=@s)
   # Usage message
   def self.usage
     puts <<-EOS
@@ -13,7 +14,24 @@ rgovdata client v#{RGovData::Version::STRING}
 Usage:
   rgd [options]
 
+Command Options
+  -c | --command    immediately executes the command provided
+
+The following commands are supported in the rgovdata shell.
+They can also be passed on the command line:
+
+  rgd -c command
   
+  == Core Commands ==
+  help
+  exit
+  show status
+
+  == Discovery Commands ==
+  ls
+  cd
+  info
+
     EOS
   end
 
@@ -23,13 +41,22 @@ Usage:
   end
 
   # run the basic REPL
-  def run( prompt = 'rgd> ' )
+  def run
+    if options[:command].present?
+      evaluate options[:command].join(' ')
+      return
+    end
     welcome
     repl = lambda do |prompt|
       print prompt
       evaluate( STDIN.gets.chomp! )
     end
     loop { break unless repl[prompt] }
+  end
+
+  # Update and return the formatted prompt
+  def prompt
+    @prompt = 'rgd> '
   end
 
   protected
@@ -63,5 +90,36 @@ Usage:
 rgovdata client v#{RGovData::Version::STRING}. Type 'help' for info...
     EOS
   end
+
+  # Prints current status
+  def show_status
+    puts "shell options: #{options.inspect}"
+  end
+
+  # handle show command
+  def show(args=[])
+    cmd = args.shift || "help"
+    
+    case cmd
+    when /^set/i
+      set(args)
+    when /^status?$/i
+      status(args)
+    else
+      help
+    end
+  end
+
+  # handle status command
+  def status(args=[])
+    show_status
+    config.show_status
+  end
+
+  # handle ls command
+  def ls(args=[])
+    
+  end
+
 
 end

@@ -17,6 +17,10 @@ describe RGovData::Config do
     it { should be_a(String) }
   end
 
+  describe "#show_status" do
+    it { config.should respond_to(:show_status) }
+  end
+
   describe "#load_default_config" do
     before {
       ENV['rgovdata_username'] = nil

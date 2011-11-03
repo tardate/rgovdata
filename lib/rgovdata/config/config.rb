@@ -74,6 +74,16 @@ Please review the configuration and retry..\n\n\n")
     @credentialsets = {}
     @default_realm = nil
   end
+
+  # Prints current status
+  def show_status
+    if credentialsets
+      puts "credential sets available: #{credentialsets.keys.join(',')}"
+      puts credentialsets.inspect
+    else
+      puts "credential sets available: none"
+    end
+  end
   
   # Sets environment overrides for supported settings
   def refresh_from_env
