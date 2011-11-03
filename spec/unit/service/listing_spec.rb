@@ -60,7 +60,7 @@ describe RGovData::ServiceListing do
     let(:listing) { RGovData::ServiceListing.new }
     let(:mock_datasets) { ['a','b'] }
     before {
-      RGovData::Service.stub(:get_instance).and_return(RGovData::Service.new('uri','type','transport','credentialset'))
+      RGovData::Service.stub(:get_instance).and_return(RGovData::Service.new({:uri=>'uri',:type=>'type',:transport=>'transport',:credentialset=>'credentialset'}))
       RGovData::Service.any_instance.stub(:datasets).and_return(mock_datasets)
     }
     subject { listing.datasets }

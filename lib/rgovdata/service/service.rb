@@ -1,36 +1,57 @@
-# A ServiceListing is the metadata describing a specific service
-# It encapsulates access to the underlying service
+require 'ostruct'
+
+# A Service describes a specific service
+# It encapsulates access to the underlying service implementation
 class RGovData::Service
   include RGovData::CommonConfig
   include RGovData::Dn
 
-  attr_reader :key
-  attr_reader :uri,:type,:transport,:credentialset
+  attr_accessor :options
+  attr_accessor :dataset_key
   attr_reader :native_instance    # the underlying native service object (if applicable)
 
   class << self
     # Returns the appropriate Service class for the given uri and type
-    # +uri+ is the uri (string)
+    # +options may be a RGovData::ServiceListing or a Hash
+    # If +options+ is a hash, it requires the following members:
+    # +uri+
     # +type+
     # +transport+
     # +credentialset+
-    def get_instance(uri,type,transport,credentialset)
+    def get_instance(options={})
+      type = (options.class <= RGovData::ServiceListing) ? options.type : options[:type]
       service_class = "RGovData::#{type.to_s.capitalize}Service".constantize
-      service_class.new(uri,type,transport,credentialset)
+      service_class.new(options)
     rescue # invalid or not a supported type
       nil
     end
   end
 
   # +new+ requires
-  # +uri+ url to the service interface
-  # +type+ service type: :odata, :csv ..
-  # +transport+ transport mechanism selector: :odata, :get
+  # +options may be a RGovData::ServiceListing or a Hash
+  # If +options+ is a hash, it requires the following members:
+  # +uri+
+  # +type+
+  # +transport+
   # +credentialset+
-  def initialize(uri,type,transport,credentialset)
-    @uri,@type,@transport,@credentialset = uri,type,transport,credentialset
+  def initialize(options)
+    @options = if options.is_a?(Hash)
+      OpenStruct.new(options)
+    elsif options.class <= RGovData::ServiceListing
+      options.dup # avoid circular refs
+    else
+      OpenStruct.new
+    end
   end
 
+  # attribute accessors
+  def realm         ; options.realm         ; end
+  def service_key   ; options.service_key   ; end
+  def uri           ; options.uri           ; end
+  def type          ; options.type          ; end
+  def transport     ; options.transport     ; end
+  def credentialset ; options.credentialset ; end
+  
   # Returns the native service object if applicable
   # By default, returns self
   def native_instance

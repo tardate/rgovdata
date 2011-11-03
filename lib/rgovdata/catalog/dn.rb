@@ -9,7 +9,8 @@ module RGovData::Dn
       nameparts.push('/')
       nameparts.push(realm)
     end
-    nameparts.push(key) if defined?(key)
+    nameparts.push(service_key) if defined?(service_key) && service_key.present?
+    nameparts.push(dataset_key) if defined?(dataset_key) && dataset_key.present?
     nameparts.join('/')
   end
 

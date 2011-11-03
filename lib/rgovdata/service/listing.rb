@@ -16,9 +16,13 @@ class RGovData::ServiceListing
 
   include RGovData::Dn
 
+  # Returns the collection of services for this listing
   def service
-    @service ||= RGovData::Service.get_instance(uri,type,transport,credentialset)
+    @service ||= RGovData::Service.get_instance(self)
   end
+
+  # Returns the service key
+  alias_method :service_key, :key
 
   # Returns an array of DataSets for the service
   # => delegate to service
@@ -38,6 +42,6 @@ class RGovData::ServiceListing
   end
   # Alias for find
   alias_method :find_by_id, :find
-
+  
 
 end
