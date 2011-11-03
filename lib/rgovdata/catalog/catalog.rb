@@ -1,5 +1,6 @@
 class RGovData::Catalog
   attr_accessor :realm
+  include RGovData::Dn
 
   class << self
     # Returns the object specified by the +key+
@@ -9,17 +10,15 @@ class RGovData::Catalog
     # //sg - will return RGovData::Catalog for realm=:sg
     # //sg/nlb - will return RGovData::ServiceListing for the nlb service in SG
     # /nlb - will return RGovData::ServiceListing for the nlb service in SG (assuming SG is the default realm)
-    # //sg/nlb/Library - will return RGovData::ODataService for the nlb Library service in SG
+    # //sg/nlb/Library - will return RGovData::OdataService for the nlb Library service in SG
     def get(key)
-      found = nil
+      key ||= '//'
       keypart = Regexp.new(/(?:\/\/([^\/]+))?(?:\/([^\/]+))?(?:\/([^\/]+))?/).match(key)
-      if keypart[1]
-        found = catalog = self.new(keypart[1])
-        if keypart[2]
-          found = service = catalog.get_service(keypart[2])
-          if keypart[3]
-            found = service.get_dataset(keypart[3])
-          end
+      found = catalog = self.new(keypart[1])
+      if keypart[2]
+        found = service = catalog.get_service(keypart[2])
+        if keypart[3]
+          found = service.get_dataset(keypart[3])
         end
       end
       found
@@ -59,6 +58,16 @@ class RGovData::Catalog
     RGovData::RegistryStrategy.instance_for_realm(realm)
   end
   protected :registry_strategy
+  
+  # Generic interface to return the currently applicable record set
+  # => overrides RGovData::Dn.records
+  def records
+    if realm.present?
+      services
+    else
+      realms
+    end
+  end
 
   # Clears current state
   def clear

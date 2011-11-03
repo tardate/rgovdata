@@ -9,11 +9,11 @@ describe RGovData::Service do
     end
     context "with odata type" do
       subject { RGovData::Service.get_instance('uri','odata','odata','credentialset') }
-      it { should be_a(RGovData::ODataService) }
+      it { should be_a(RGovData::OdataService) }
     end
     context "with csv type" do
       subject { RGovData::Service.get_instance('uri','csv','get','credentialset') }
-      it { should be_a(RGovData::CsvService) }
+      it { should be_a(RGovData::FileService) }
     end
   end
   

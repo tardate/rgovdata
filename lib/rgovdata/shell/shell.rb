@@ -56,15 +56,23 @@ They can also be passed on the command line:
     loop { break unless repl[prompt] }
   end
 
+  protected
+
   # Update and return the formatted prompt
   def prompt
     @prompt = "rgd:#{current_path}> "
   end
+  # Returns the current path string
   def current_path
     "//#{discovery_path.join('/')}"
   end
-
-  protected
+  # Returns the RGovData object corresponding to the current path
+  def current_object
+    RGovData::Catalog.get(current_path)
+  rescue
+    STDERR.puts "ERROR: there is no object matching #{current_path}"
+    nil
+  end
 
   # Evaluates a specific command
   def evaluate(cmd)
@@ -123,7 +131,14 @@ rgovdata client v#{RGovData::Version::STRING}. Type 'help' for info...
 
   # handle ls command
   def ls(args=[])
-    
+    rgd_object = current_object
+    if rgd_object
+      puts current_object.to_s
+      puts "Records:"
+      current_object.records.each do |record|
+        puts record
+      end
+    end
   end
 
   # handle cd command

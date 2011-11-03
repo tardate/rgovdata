@@ -15,9 +15,9 @@ class RGovData::Service
     def get_instance(uri,type,transport,credentialset)
       case type && type.to_sym
       when :odata
-        RGovData::ODataService.new(uri,type,transport,credentialset)
+        RGovData::OdataService.new(uri,type,transport,credentialset)
       when :csv
-        RGovData::CsvService.new(uri,type,transport,credentialset)
+        RGovData::FileService.new(uri,type,transport,credentialset)
       else # not a supported type
         nil
       end
@@ -38,14 +38,10 @@ class RGovData::Service
   def native_instance
     @native_instance || self
   end
-
-  # Returns an Array of attributes supported by the service
-  # By default, it is nil - which means the attributes are indeterminate
-  def attributes
-  end
-
+  
   # Returns an array of DataSets (names) for the service
   def datasets
+    []
   end
 
   # Returns the dataset(s) matching +key+

@@ -14,9 +14,7 @@ class RGovData::ServiceListing
   attr_accessor :transport     # transport mechanism [:odata,:get]
   attr_accessor :credentialset # name of the credential set required
 
-  def id
-    "//#{realm}/#{key}"
-  end
+  include RGovData::Dn
 
   def service
     @service ||= RGovData::Service.get_instance(uri,type,transport,credentialset)
@@ -40,5 +38,6 @@ class RGovData::ServiceListing
   end
   # Alias for find
   alias_method :find_by_id, :find
+
 
 end

@@ -33,10 +33,10 @@ describe RGovData::ServiceListing do
 
   describe "#service" do
     [
-      {:type => :odata, :transport => :odata, :uri => 'http://example.com', :expect_class => RGovData::ODataService },
-      {:type => 'odata', :transport => 'odata', :uri => 'http://example.com', :expect_class => RGovData::ODataService },
-      {:type => :csv, :transport => :get, :uri => 'http://example.com', :expect_class => RGovData::CsvService },
-      {:type => 'csv', :transport => 'get', :uri => 'http://example.com', :expect_class => RGovData::CsvService },
+      {:type => :odata, :transport => :odata, :uri => 'http://example.com', :expect_class => RGovData::OdataService },
+      {:type => 'odata', :transport => 'odata', :uri => 'http://example.com', :expect_class => RGovData::OdataService },
+      {:type => :csv, :transport => :get, :uri => 'http://example.com', :expect_class => RGovData::FileService },
+      {:type => 'csv', :transport => 'get', :uri => 'http://example.com', :expect_class => RGovData::FileService },
       {:type => :dummy, :transport => :dummy, :uri => 'http://example.com', :expect_class => nil }
     ].each do |options|
       context "with type:#{options[:type]} transport:#{options[:transport]}" do
@@ -66,6 +66,12 @@ describe RGovData::ServiceListing do
     subject { listing.datasets }
     it { should be_a(Array) }
     it { should eql(mock_datasets) }
+
+    describe "#records" do
+      subject { listing.records }
+      it { should eql(mock_datasets) }
+    end
+
     describe "#get_dataset" do
       let(:key) { 'key' }
       let(:mock_dataset_a) { 'mock_dataset_a' }
@@ -87,4 +93,9 @@ describe RGovData::ServiceListing do
     end
   end
 
+  describe "#to_s" do
+    its(:to_s) { should be_a(String) }
+  end
+
+  
 end

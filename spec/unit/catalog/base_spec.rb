@@ -32,15 +32,50 @@ describe RGovData::Catalog do
   end
 
   describe "#realms" do
-    let(:catalog) { RGovData::Catalog.new }
     its(:realms) { should be_a(Array) }
     supported_realms.each do |realm|
       its(:realms) { should include(realm) }
     end
   end
 
+  describe "#to_s" do
+    its(:to_s) { should be_a(String) }
+  end
+
+  describe "#records" do
+    context "without realm" do
+      let(:subject) { RGovData::Catalog.new(nil) }
+      its(:records) { should be_a(Array) }
+      supported_realms.each do |realm|
+        its(:records) { should include(realm) }
+      end
+    end
+    context "with realm" do
+      let(:subject) { RGovData::Catalog.new(supported_realms.first) }
+      its(:records) { should be_a(Array) }
+      it "should be an array of services" do
+        subject.records.first.should be_a(RGovData::ServiceListing)
+      end
+    end
+  end
+
   describe "##get" do
     subject { RGovData::Catalog.get(key) }
+    context "with nil selector" do
+      let(:key) { nil }
+      it { should be_a(RGovData::Catalog) }
+      its(:realm) { should be_nil }
+    end
+    context "with blank selector" do
+      let(:key) { '' }
+      it { should be_a(RGovData::Catalog) }
+      its(:realm) { should be_nil }
+    end
+    context "with no realm" do
+      let(:key) { '//' }
+      it { should be_a(RGovData::Catalog) }
+      its(:realm) { should be_nil }
+    end
     context "with realm only" do
       let(:key) { '//sg' }
       it { should be_a(RGovData::Catalog) }

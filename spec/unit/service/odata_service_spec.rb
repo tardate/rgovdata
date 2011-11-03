@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe RGovData::ODataService do
+describe RGovData::OdataService do
 
   let(:credentialset) { 'basic' }
-  let(:service) { RGovData::ODataService.new('uri','odata','odata',credentialset) }
+  let(:service) { RGovData::OdataService.new('uri','odata','odata',credentialset) }
 
   before {
     # These tests won't call on a real service

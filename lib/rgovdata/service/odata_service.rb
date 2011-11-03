@@ -1,14 +1,10 @@
 require 'ruby_odata'
-class RGovData::ODataService < RGovData::Service
+class RGovData::OdataService < RGovData::Service
 
-  # Returns an Array of attributes supported by the service
-  # By default, it is nil - which means the attributes are indeterminate
-  def attributes
-  end
-
-  # Returns an array of DataSets (names) for the service
-  def datasets
-  end
+  
+  # # Returns an array of DataSets (names) for the service
+  # def datasets
+  # end
 
   # Returns the native service object if applicable
   # By default, returns self

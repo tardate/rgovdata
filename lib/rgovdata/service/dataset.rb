@@ -1,0 +1,3 @@
+class RGovData::DataSet
+
+end
