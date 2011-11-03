@@ -27,6 +27,11 @@ describe RGovData::Service do
     it { should eql(service) }
   end
 
+  describe "#id" do
+    let(:expect) { '//sg/key_name' }
+    its(:id) { should eql(expect) }
+  end
+
   describe "#datasets" do
     let(:mock_dataset_a) { 'mock_dataset_a' }
     let(:mock_dataset_b) { 'mock_dataset_b' }
@@ -37,6 +42,12 @@ describe RGovData::Service do
     subject { service.datasets }
     it { should be_a(Array) }
     it { should eql(mock_datasets) }
+
+    describe "#records" do
+      subject { service.records }
+      it { should eql(mock_datasets) }
+    end
+
     describe "#get_dataset" do
       let(:key) { 'mock_dataset' }
       subject { service.get_dataset(key) }

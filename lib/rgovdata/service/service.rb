@@ -2,7 +2,9 @@
 # It encapsulates access to the underlying service
 class RGovData::Service
   include RGovData::CommonConfig
+  include RGovData::Dn
 
+  attr_reader :key
   attr_reader :uri,:type,:transport,:credentialset
   attr_reader :native_instance    # the underlying native service object (if applicable)
 
@@ -13,14 +15,10 @@ class RGovData::Service
     # +transport+
     # +credentialset+
     def get_instance(uri,type,transport,credentialset)
-      case type && type.to_sym
-      when :odata
-        RGovData::OdataService.new(uri,type,transport,credentialset)
-      when :csv
-        RGovData::FileService.new(uri,type,transport,credentialset)
-      else # not a supported type
-        nil
-      end
+      service_class = "RGovData::#{type.to_s.capitalize}Service".constantize
+      service_class.new(uri,type,transport,credentialset)
+    rescue # invalid or not a supported type
+      nil
     end
   end
 

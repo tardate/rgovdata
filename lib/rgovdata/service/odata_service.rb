@@ -1,7 +1,6 @@
 require 'ruby_odata'
 class RGovData::OdataService < RGovData::Service
 
-  
   # # Returns an array of DataSets (names) for the service
   # def datasets
   # end
@@ -17,14 +16,18 @@ class RGovData::OdataService < RGovData::Service
     # TODO: this should probably be a setting in the ServiceListing
     rest_options = {:verify_ssl=>false}
     if credentialset == 'basic'
+      credentials = config.credentialsets['basic']
       # merge basic auth
-      rest_options.merge!({ :username => "bob", :password=> "12345" })
+      rest_options.merge!({ :username => credentials['username'], :password => credentials['password'] })
     end
     svc = OData::Service.new(uri, rest_options)
     if credentialset == 'projectnimbus'
+      credentials = config.credentialsets['projectnimbus']
       # some special funky to insert headers for projectnimbus authentication
       actual_rest_options = svc.instance_variable_get(:@rest_options)
-      rest_options = actual_rest_options.merge({:headers=>{'AccountKey'=>'blah', 'UniqueUserID'=>'00000000000000000000000000000001'}})
+      rest_options = actual_rest_options.merge({:headers => {
+        'AccountKey' => credentials['AccountKey'], 'UniqueUserID' => credentials['UniqueUserID']
+      }})
       svc.instance_variable_set(:@rest_options,rest_options)
     end
     svc

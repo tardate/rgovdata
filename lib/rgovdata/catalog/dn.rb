@@ -15,7 +15,7 @@ module RGovData::Dn
 
   # Returns the human version of the object
   def to_s
-    "#{id}: #{self.class.name}"
+    "#{id} [#{self.class.name}]"
   end
 
   # Generic interface to return the currently applicable record set

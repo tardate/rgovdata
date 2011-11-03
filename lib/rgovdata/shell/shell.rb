@@ -133,7 +133,7 @@ rgovdata client v#{RGovData::Version::STRING}. Type 'help' for info...
   def ls(args=[])
     rgd_object = current_object
     if rgd_object
-      puts current_object.to_s
+      puts "Current node: #{current_object}"
       puts "Records:"
       current_object.records.each do |record|
         puts record
