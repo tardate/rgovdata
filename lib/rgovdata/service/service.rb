@@ -5,9 +5,9 @@ require 'ostruct'
 class RGovData::Service
   include RGovData::CommonConfig
   include RGovData::Dn
+  ATTRIBUTES = [:realm,:service_key,:uri,:type,:transport,:credentialset]
 
   attr_accessor :options
-  attr_accessor :dataset_key
   attr_reader :native_instance    # the underlying native service object (if applicable)
 
   class << self
@@ -51,7 +51,20 @@ class RGovData::Service
   def type          ; options.type          ; end
   def transport     ; options.transport     ; end
   def credentialset ; options.credentialset ; end
-  
+
+  def attributes
+    ATTRIBUTES
+  end
+
+  # Returns a hash that fully describes this service and can be used as a parameter to +new+
+  def initialization_hash
+    h = {}
+    attributes.each do |attribute|
+      h.merge!(attribute => self.send(attribute))
+    end
+    h
+  end
+
   # Returns the native service object if applicable
   # By default, returns self
   def native_instance

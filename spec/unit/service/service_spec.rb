@@ -27,6 +27,22 @@ describe RGovData::Service do
     it { should eql(service) }
   end
 
+  describe "#attributes" do
+    subject { service.attributes }
+    it { should be_a(Array) }
+  end
+
+  describe "#initialization_hash" do
+    subject { service.initialization_hash }
+    let(:keys) { service.initialization_hash.keys }
+    it { should be_a(Hash) }
+    it "should contain members for all attributes" do
+      service.attributes.each do |attribute|
+        keys.should include(attribute)
+      end
+    end
+  end
+
   describe "#id" do
     let(:expect) { '//sg/service_name' }
     its(:id) { should eql(expect) }
