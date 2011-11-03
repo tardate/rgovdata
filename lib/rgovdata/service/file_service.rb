@@ -1,3 +1,4 @@
+# This is the catalog class that describes a generic file-based service
 class RGovData::FileService < RGovData::Service
 
   # Returns an array of DataSets (names) for the service

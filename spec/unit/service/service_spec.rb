@@ -17,7 +17,7 @@ describe RGovData::Service do
     end
   end
   
-  let(:service) { RGovData::Service.new({:uri=>'uri',:type=>'csv',:transport=>'get',:credentialset=>'credentialset'}) }
+  let(:service) { RGovData::Service.new({:realm=>:sg, :service_key=>'service_name', :uri=>'uri',:type=>'csv',:transport=>'get',:credentialset=>'credentialset'}) }
   subject { service }
   
   it_behaves_like "includes common config"
@@ -28,7 +28,7 @@ describe RGovData::Service do
   end
 
   describe "#id" do
-    let(:expect) { '//sg/key_name' }
+    let(:expect) { '//sg/service_name' }
     its(:id) { should eql(expect) }
   end
 

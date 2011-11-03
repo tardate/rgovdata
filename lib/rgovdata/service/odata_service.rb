@@ -1,4 +1,6 @@
 require 'ruby_odata'
+
+# This is the catalog class that describes an OData Service
 class RGovData::OdataService < RGovData::Service
 
   # # Returns an array of DataSets (names) for the service

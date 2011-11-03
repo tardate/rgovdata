@@ -13,11 +13,13 @@ module RGovData::Dn
     nameparts.push(dataset_key) if defined?(dataset_key) && dataset_key.present?
     nameparts.join('/')
   end
+
+  # Returns a rails-compatible ID
   def to_param
     id.gsub('/',':')
   end
 
-  # Returns the human version of the object
+  # Returns the human version of the object name/identification
   def to_s
     "#{id} [#{self.class.name}]"
   end
