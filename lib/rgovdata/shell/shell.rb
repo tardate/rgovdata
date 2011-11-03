@@ -1,6 +1,7 @@
 class RGovData::Shell
   include RGovData::CommonConfig
   attr_accessor :options, :prompt
+  attr_accessor :discovery_path
 
   # command line options definition
   OPTIONS = %w(help verbose command=@s)
@@ -38,6 +39,7 @@ They can also be passed on the command line:
   # +new+
   def initialize(options)
     @options = (options||{}).each{|k,v| {k => v} }
+    @discovery_path = [config.default_realm].compact
   end
 
   # run the basic REPL
@@ -56,7 +58,10 @@ They can also be passed on the command line:
 
   # Update and return the formatted prompt
   def prompt
-    @prompt = 'rgd> '
+    @prompt = "rgd:#{current_path}> "
+  end
+  def current_path
+    "//#{discovery_path.join('/')}"
   end
 
   protected
@@ -121,5 +126,17 @@ rgovdata client v#{RGovData::Version::STRING}. Type 'help' for info...
     
   end
 
+  # handle cd command
+  def cd(args=[])
+    cmd = args.shift || "ls"
+    case cmd
+    when '..'
+      discovery_path.pop
+    when /^ls$/i
+      ls
+    else
+      discovery_path.push(*cmd.split('/'))
+    end
+  end
 
 end
