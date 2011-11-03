@@ -5,7 +5,7 @@ require 'spec_helper'
 describe "SG NLB Service" do
   let(:config) { RGovData::Config.instance }
   before :all do
-    config.load_config(integration_test_config_filename, true)
+    config.load_config(integration_test_config_filename, {:generate_default => true,:required => true})
   end
   after :all do
     config.clear

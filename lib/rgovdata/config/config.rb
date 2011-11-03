@@ -15,21 +15,46 @@ class RGovData::Config
   attr_accessor :default_realm, :credentialsets
 
   def initialize
-    clear
-    # load default config
-    refresh_from_env
+    load_default_config
   end
 
-  def load_config(configfilepath, generate_default_if_not_found = true)
+  # Reloads configuraiton from default config provider
+  # - rails config file (if used in Rails)
+  # - current directory
+  # - environment settings
+  def load_default_config
+    clear
+    # load default config
+    if rails_root
+      # if rails env, load from Rails.root.join('config',BASE_NAME)
+      load_config(rails_root.join('config',BASE_NAME),{:generate_default => false,:required => false})
+    elsif
+      # else load from pwd
+      load_config(self.class.default_config_file,{:generate_default => false,:required => false})
+    else
+      # else just refresh_from_env
+      refresh_from_env
+    end
+  end
+  # Returns the rails root, if the Rails environment is available
+  def rails_root
+    Rails.root if defined?(Rails)
+  end
+  protected :rails_root
+
+  def load_config(configfilepath, options = {})
+    options.reverse_merge!(:generate_default => true,:required => true)
     unless File.exists?(configfilepath)
-      self.class.reset_configfile(configfilepath) if generate_default_if_not_found
+      self.class.reset_configfile(configfilepath) if options[:generate_default]
       if File.exists?(configfilepath)
         raise ConfigurationFileInitialized.new("\n
 No configuration file found.
 A new file has been initialized at: #{configfilepath}
 Please review the configuration and retry..\n\n\n")
-      else
+      elsif options[:required]
         raise ConfigurationFileNotFound.new("cannot load config file #{configfilepath}")
+      else
+        return
       end
     end
     update_settings(OpenStruct.new(YAML::load(File.read(configfilepath))))

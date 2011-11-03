@@ -1,4 +1,5 @@
 require 'spec_helper'
+include MocksHelper
 
 describe RGovData::Config do
   let(:config) { RGovData::Config.instance }
@@ -16,6 +17,48 @@ describe RGovData::Config do
     it { should be_a(String) }
   end
 
+  describe "#load_default_config" do
+    before {
+      ENV['rgovdata_username'] = nil
+      ENV['rgovdata_password'] = nil
+    }
+    context "with Rails environment" do
+      let(:expect) { 'rails_root_username' }
+      before {
+        config.stub(:rails_root).and_return(mock_rails_root)
+        config.load_default_config
+      }
+      subject { config.credentialsets['basic']['username']}
+      it "should load settings from the Rails.root/config/BASE_NAME file" do
+        should eql(expect)
+      end
+    end
+
+    context "with config file in pwd" do
+      let(:expect) { 'mock_username' }
+      before {
+        config.class.stub(:default_config_file).and_return(mock_configfile_path)
+        config.load_default_config
+      }
+      subject { config.credentialsets['basic']['username']}
+      it "should load settings from the pwd file" do
+        should eql(expect)
+      end
+    end
+
+    context "with no config file and no env setting" do
+      let(:expect) { nil }
+      before {
+        config.class.stub(:default_config_file).and_return(mock_configfile_path_notfound)
+        config.load_default_config
+      }
+      subject { config.credentialsets['basic']}
+      it "should load settings from the pwd file" do
+        should eql(expect)
+      end
+    end
+  end
+
   describe "#load_config" do
     let(:temp_config_file) { get_temp_file('rgovdata_config_test_') }
     let(:config) { RGovData::Config.instance }
@@ -24,7 +67,7 @@ describe RGovData::Config do
     end
     it "should not generate template file if auto-generation not enabled" do
       expect {
-        config.load_config(temp_config_file,false)
+        config.load_config(temp_config_file,{:generate_default => false})
       }.to raise_error(RGovData::Config::ConfigurationFileNotFound)
     end
     it "should generate template file if auto-generation is enabled" do
@@ -37,7 +80,7 @@ describe RGovData::Config do
 
   describe "#credentialsets" do
     before :all do
-      config.load_config(config.class.template_path,false)
+      config.load_config(config.class.template_path,{:generate_default => false})
     end
     {
       "basic" => { "username" => "_insert_your_username_here_", "password" => "your_password"},
@@ -66,7 +109,7 @@ describe RGovData::Config do
       let(:key) { 'abcdefg' }
       before {
         ENV[override] = key
-        config.load_config(config.class.template_path,false)
+        config.load_config(config.class.template_path,{:generate_default => false})
       }
       after { ENV[override] = nil }
       subject { config.credentialsets[options[:credentialset]][options[:item]] }
