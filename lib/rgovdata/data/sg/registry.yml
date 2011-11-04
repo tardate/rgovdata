@@ -1,24 +1,57 @@
 --- !ruby/object:RGovData::ServiceListing
 realm: :sg
-key: nlb
-name: Libraries
-description: List and location of Public Libraries in Singapore
-keywords: library
-license:
-uri: https://api.projectnimbus.org/nlbodataservice.svc
-type: :odata
-transport: :odata
-credentialset: projectnimbus
---- !ruby/object:RGovData::ServiceListing
-realm: :sg
 key: lta
-name: Libraries
-description: List and location of Public Libraries in Singapore
-keywords: library
+name: Traffic and Road Conditions
+description: Traffic and Road Conditions in Singapore
+keywords: road, traffic, incidents, parking
+publisher: Singapore Land Transport Authority
 license:
 uri: https://api.projectnimbus.org/ltaodataservice.svc
 type: :odata
-transport: :odata
+credentialset: projectnimbus
+--- !ruby/object:RGovData::ServiceListing
+realm: :sg
+key: nlb
+name: Libraries
+description: Information about the Public Libraries in Singapore and their collections
+keywords: library, book
+publisher: National Library Board Singapore (NLB)
+license:
+uri: https://api.projectnimbus.org/nlbodataservice.svc
+type: :odata
+credentialset: projectnimbus
+--- !ruby/object:RGovData::ServiceListing
+realm: :sg
+key: nea
+name: Meteorological services
+description: Meteorological services in Singapore
+keywords: weather
+publisher: Singapore National Environment Agency
+license:
+uri: https://api.projectnimbus.org/neaodataservice.svc
+type: :odata
+credentialset: projectnimbus
+--- !ruby/object:RGovData::ServiceListing
+realm: :sg
+key: snb
+name: ShowNearBy
+description: locations of persons, points-of-interest, and activities
+keywords: location, bus stop, ATM, clinic, shops, AED
+publisher: ShowNearBy
+license:
+uri: https://api.projectnimbus.org/snbodataservice.svc
+type: :odata
+credentialset: projectnimbus
+--- !ruby/object:RGovData::ServiceListing
+realm: :sg
+key: stb
+name: Events and Places
+description: Tourism related events and places
+keywords: event, hotel, places of interest
+publisher: Singapore Tourism Board
+license:
+uri: https://api.projectnimbus.org/stbodataservice.svc
+type: :odata
 credentialset: projectnimbus
 --- !ruby/object:RGovData::ServiceListing
 realm: :sg
@@ -29,7 +62,6 @@ keywords: Transportation and Storage
 publisher: Civil Aviation Authority of Singapore
 license:
 uri: http://data.gov.sg/common/download.aspx?id=13008&rid=1805010000000004396B&filetype=csv
-type: :csv
-transport: :get
+type: :file
 
 
