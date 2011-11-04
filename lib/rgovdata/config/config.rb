@@ -10,7 +10,7 @@ class RGovData::Config
   class ConfigurationFileNotFound < ConfigError
 	end
   class ConfigurationFileInitialized < ConfigError
-	end
+  end
 
   attr_accessor :default_realm, :credentialsets
 
@@ -27,10 +27,10 @@ class RGovData::Config
     # load default config
     if rails_root
       # if rails env, load from Rails.root.join('config',BASE_NAME)
-      load_config(rails_root.join('config',BASE_NAME),{:generate_default => false,:required => false})
+      load_config(rails_root.join('config',BASE_NAME),self.class.default_loader_options)
     elsif
       # else load from pwd
-      load_config(self.class.default_config_file,{:generate_default => false,:required => false})
+      load_config(self.class.default_config_file,self.class.default_loader_options)
     else
       # else just refresh_from_env
       refresh_from_env
@@ -119,6 +119,14 @@ Please review the configuration and retry..\n\n\n")
 
     def template_path
       RGovData::Template.path('config_template.yml')
+    end
+
+    def default_loader_options
+      @@default_loader_options ||= {:generate_default => false,:required => false}
+    end
+    
+    def require_config_file
+      @@default_loader_options = {:generate_default => true,:required => true}
     end
   end
   

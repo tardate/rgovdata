@@ -38,6 +38,7 @@ They can also be passed on the command line:
 
   # +new+
   def initialize(options)
+    require_config_file
     @options = (options||{}).each{|k,v| {k => v} }
     @discovery_path = [config.default_realm].compact
   end

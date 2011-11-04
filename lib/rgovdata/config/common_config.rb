@@ -5,4 +5,9 @@ module RGovData::CommonConfig
   def config
     RGovData::Config.instance
   end
+  # Sets the requirement to have a config file
+  # Must be called before config is invoked
+  def require_config_file
+    RGovData::Config.require_config_file
+  end
 end
