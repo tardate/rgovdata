@@ -15,7 +15,7 @@ describe RGovData::FileDataSet do
   end
 
   describe "#attributes" do
-    let(:expect) { nil }
+    let(:expect) { ['row'] }
     subject { dataset.attributes }
     it { should eql(expect) }
   end
@@ -23,7 +23,18 @@ describe RGovData::FileDataSet do
   describe "#records" do
     subject { dataset.records }
     it { should be_a(StringIO) }
-  end
   
+    context "with a record_limit" do
+      let(:record_limit) { 3 }
+      before {
+        dataset.limit = record_limit
+      }
+      subject { dataset.records(true) }
+      it { should be_a(Array) }
+      its(:first) { should be_a(String) }
+      its(:count) { should eql(record_limit) }
+    end
+  end
+
 
 end

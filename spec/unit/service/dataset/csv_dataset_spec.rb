@@ -25,6 +25,17 @@ describe RGovData::CsvDataSet do
   describe "#records" do
     subject { dataset.records }
     its(:count) { should eql(expect_row_count) }
+
+    context "with a record_limit" do
+      let(:record_limit) { 3 }
+      before {
+        dataset.limit = record_limit
+      }
+      subject { dataset.records(true) }
+      it { should be_a(Array) }
+      its(:first) { should be_a(CSV::Row) }
+      its(:count) { should eql(record_limit) }
+    end
   end
   
 

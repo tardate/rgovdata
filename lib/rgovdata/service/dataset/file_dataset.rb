@@ -5,6 +5,20 @@ require 'open-uri'
 # Currently only handles text files
 class RGovData::FileDataSet < RGovData::DataSet
 
+  # Returns array of attributes that describe the records of the specific entity
+  # Generic FileDataSets don't have attributes, returns a single selector for the row
+  # => overrides RGovData::Dn.attributes
+  def attributes
+    ['row']
+  end
+
+  # Returns the value of the named +attribute+ from a recordset +row+
+  # Generic FileDataSets don't have attributes, so always return full row
+  # => overrides RGovData::DataSet.attribute_value
+  def attribute_value(row,attribute)
+    row
+  end
+
   # Loads the native dataset (URI or File)
   # => overrides RGovData::DataSet.load_instance
   def load_instance

@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Paul Gallagher"]
-  s.date = %q{2011-11-04}
+  s.date = %q{2011-11-05}
   s.default_executable = %q{rgd}
   s.description = %q{Consuming government-published data in a ruby or rails application shouldn't require a PhD}
   s.email = %q{gallagher.paul@gmail.com}
