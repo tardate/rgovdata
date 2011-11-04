@@ -6,7 +6,7 @@ describe RGovData::ServiceListing do
     subject { RGovData::ServiceListing.new }
     [
       :realm,:key,:name,:description,:keywords,:publisher,
-      :uri,:license,:type,:transport,:credentialset
+      :uri,:license,:type,:credentialset
     ].each do |property|
       describe property do
         it "should support setter and getter" do
@@ -33,17 +33,16 @@ describe RGovData::ServiceListing do
 
   describe "#service" do
     [
-      {:type => :odata, :transport => :odata, :uri => 'http://example.com', :expect_class => RGovData::OdataService },
-      {:type => 'odata', :transport => 'odata', :uri => 'http://example.com', :expect_class => RGovData::OdataService },
-      {:type => :csv, :transport => :get, :uri => 'http://example.com', :expect_class => RGovData::FileService },
-      {:type => 'csv', :transport => 'get', :uri => 'http://example.com', :expect_class => RGovData::FileService },
-      {:type => :dummy, :transport => :dummy, :uri => 'http://example.com', :expect_class => nil }
+      {:type => :odata, :uri => 'http://example.com', :expect_class => RGovData::OdataService },
+      {:type => 'odata', :uri => 'http://example.com', :expect_class => RGovData::OdataService },
+      {:type => :csv, :uri => 'http://example.com', :expect_class => RGovData::FileService },
+      {:type => 'csv', :uri => 'http://example.com', :expect_class => RGovData::FileService },
+      {:type => :dummy, :uri => 'http://example.com', :expect_class => nil }
     ].each do |options|
-      context "with type:#{options[:type]} transport:#{options[:transport]}" do
+      context "with type:#{options[:type]}" do
         let(:listing) { RGovData::ServiceListing.new }
         before do
           listing.type = options[:type]
-          listing.transport = options[:transport]
           listing.uri = options[:uri]
         end
         subject { listing.service }
@@ -60,7 +59,7 @@ describe RGovData::ServiceListing do
     let(:listing) { RGovData::ServiceListing.new }
     let(:mock_datasets) { ['a','b'] }
     before {
-      RGovData::Service.stub(:get_instance).and_return(RGovData::Service.new({:uri=>'uri',:type=>'type',:transport=>'transport',:credentialset=>'credentialset'}))
+      RGovData::Service.stub(:get_instance).and_return(RGovData::Service.new({:uri=>'uri',:type=>'type',:credentialset=>'credentialset'}))
       RGovData::Service.any_instance.stub(:datasets).and_return(mock_datasets)
     }
     subject { listing.datasets }

@@ -30,9 +30,11 @@ class RGovData::DataSet
   def realm           ; service.realm               ; end
   def service_key     ; service.service_key         ; end
   def dataset_key     ; options.dataset_key         ; end
-  def top             ; options.top                 ; end
-  def top=(value)
-    options.top = value
+  # Returns the record limit currently imposed
+  def limit           ; options.limit               ; end
+  # Set the record limit to +value+
+  def limit=(value)
+    options.limit = value
   end
 
   # Returns array of attributes that describe the specific entity

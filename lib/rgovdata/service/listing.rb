@@ -10,8 +10,7 @@ class RGovData::ServiceListing
   attr_accessor :license       # license covering the service if any
   attr_accessor :info_uri      # url to a web page about the service if any
   attr_accessor :uri           # url to the service interface
-  attr_accessor :type          # service type [:odata,:csv]
-  attr_accessor :transport     # transport mechanism [:odata,:get]
+  attr_accessor :type          # service type [:odata,:csv,:file]
   attr_accessor :credentialset # name of the credential set required
 
   include RGovData::Dn

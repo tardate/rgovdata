@@ -3,7 +3,7 @@ require 'spec_helper'
 describe RGovData::OdataService do
 
   let(:credentialset) { 'basic' }
-  let(:service) { RGovData::OdataService.new({:uri=>'uri',:type=>'odata',:transport=>'odata',:credentialset=>credentialset}) }
+  let(:service) { RGovData::OdataService.new({:uri=>'uri',:type=>'odata',:credentialset=>credentialset}) }
 
   before {
     # These tests won't call on a real service

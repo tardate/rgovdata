@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 # This runs integration tests against the actual OData service
-# It uses credentials from the yaml config file in the project root folder
+# It uses credentials from the rgovdata.conf file in the project root folder
 describe "SG NLB Service" do
   let(:config) { RGovData::Config.instance }
   before :all do
@@ -11,7 +11,44 @@ describe "SG NLB Service" do
     config.clear
   end
 
-  it "should description" do
-    
+  describe "ServiceListing" do
+    let(:id) { '//sg/nlb' }
+    let(:dataset_key) { 'Library' }
+    let(:service_listing) { RGovData::Catalog.get(id) }
+
+    subject { service_listing }
+    it { should be_a(RGovData::ServiceListing) }
+
+    describe "#service" do
+      let(:service) { service_listing.service }
+      subject { service }
+      it { should be_a(RGovData::Service) }
+      describe "#dataset_keys" do
+        subject { service.dataset_keys }
+        it { should include(dataset_key) }
+      end
+    end
+
+    describe "#find" do
+      let(:dataset) { service_listing.find(dataset_key) }
+      subject { dataset }
+      it { should be_a(RGovData::OdataDataSet) }
+      describe "#attributes" do
+        subject { dataset.attributes }
+        it { should include('LibraryID') }
+      end
+      describe "#records" do
+        let(:record_limit) { 3 }
+        before {
+          dataset.limit = record_limit
+        }
+        subject { dataset.records }
+        it { should be_a(Array) }
+        its(:first) { should be_a(Library) }
+        its(:count) { should eql(record_limit) }
+      end
+
+    end
   end
+
 end
