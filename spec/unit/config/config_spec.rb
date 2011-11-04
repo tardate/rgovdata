@@ -104,10 +104,10 @@ describe RGovData::Config do
   end
 
   {
-    'projectnimbus_account_key' => {:credentialset=>'projectnimbus', :item=>'AccountKey'},
-    'projectnimbus_unique_user_id' => {:credentialset=>'projectnimbus', :item=>'UniqueUserID'},
-    'rgovdata_username' => {:credentialset=>'basic', :item=>'username'},
-    'rgovdata_password' => {:credentialset=>'basic', :item=>'password'}
+    'projectnimbus_account_key' => {:credentialset=>'projectnimbus', :item=>'AccountKey', :alt=>'UniqueUserID'},
+    'projectnimbus_unique_user_id' => {:credentialset=>'projectnimbus', :item=>'UniqueUserID', :alt=>'AccountKey'},
+    'rgovdata_username' => {:credentialset=>'basic', :item=>'username', :alt=>'password'},
+    'rgovdata_password' => {:credentialset=>'basic', :item=>'password', :alt=>'username'}
   }.each do |override,options|
     describe "#credentialsets ENV['#{override}'] override" do
       let(:key) { 'abcdefg' }
@@ -118,6 +118,12 @@ describe RGovData::Config do
       after { ENV[override] = nil }
       subject { config.credentialsets[options[:credentialset]][options[:item]] }
       it { should eql(key) }
+      describe "other keys" do
+        subject { config.credentialsets[options[:credentialset]][options[:alt]] }
+        it "should not be affected" do
+          should_not be_nil
+        end
+      end
     end
   end
 

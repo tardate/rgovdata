@@ -87,10 +87,16 @@ Please review the configuration and retry..\n\n\n")
   
   # Sets environment overrides for supported settings
   def refresh_from_env
-    @credentialsets.merge!('projectnimbus' => {'AccountKey'=> ENV['projectnimbus_account_key']}) if ENV['projectnimbus_account_key']
-    @credentialsets.merge!('projectnimbus' => {'UniqueUserID'=> ENV['projectnimbus_unique_user_id']}) if ENV['projectnimbus_unique_user_id']
-    @credentialsets.merge!('basic' => {'username'=> ENV['rgovdata_username']}) if ENV['rgovdata_username']
-    @credentialsets.merge!('basic' => {'password'=> ENV['rgovdata_password']}) if ENV['rgovdata_password']
+    if ENV['projectnimbus_account_key'] || ENV['projectnimbus_unique_user_id']
+      @credentialsets['projectnimbus'] ||= {}
+      @credentialsets['projectnimbus'].merge!({'AccountKey'=> ENV['projectnimbus_account_key']}) if ENV['projectnimbus_account_key']
+      @credentialsets['projectnimbus'].merge!({'UniqueUserID'=> ENV['projectnimbus_unique_user_id']}) if ENV['projectnimbus_unique_user_id']
+    end
+    if ENV['rgovdata_username'] || ENV['rgovdata_password']
+      @credentialsets['basic'] ||= {}
+      @credentialsets['basic'].merge!({'username'=> ENV['rgovdata_username']}) if ENV['rgovdata_username']
+      @credentialsets['basic'].merge!({'password'=> ENV['rgovdata_password']}) if ENV['rgovdata_password']
+    end
   end
   protected :refresh_from_env
   
