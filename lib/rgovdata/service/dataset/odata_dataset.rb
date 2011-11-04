@@ -1,17 +1,16 @@
 # This is the catalog class that describes an OData Service DataSet
 class RGovData::OdataDataSet < RGovData::DataSet
-
-  # Returns the native dataset key
-  # => overrides RGovData::DataSet.native_dataset_key
-  def native_dataset_key
-    # TODO: is this generally true for OData??
-    "#{dataset_key}Set"
-  end
-
+  
   # Returns the attribute names based on class meta-data
   # => overrides RGovData::Dn.attributes
   def attributes
-    @attributes ||= native_service.class_metadata[dataset_key].keys
+    @attributes ||= native_service.class_metadata[entity_name].keys
+  end
+
+  # Returns the reated OData entity name for this DataSet
+  # TODO: currently, this is a hack, as ruby_odata doesn't yet return the collection EntityType
+  def entity_name
+    dataset_key.gsub(/Set$/,'')
   end
 
   # Loads the native OData::QueryBuilder

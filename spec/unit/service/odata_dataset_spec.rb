@@ -15,9 +15,22 @@ describe RGovData::OdataDataSet do
   }
 
   describe "#native_dataset_key" do
-    let(:expect) { 'TestSet' }
+    let(:expect) { 'Test' }
     subject { dataset.native_dataset_key }
     it { should eql(expect) }
+  end
+
+  describe "#entity_name" do
+    {
+      'Test' => 'Test',
+      'TestSet'=>'Test'
+    }.each do |given_key,expect|
+      context "with dataset_key:#{given_key}" do
+        let(:dataset_key) { given_key }
+        subject { dataset.entity_name }
+        it { should eql(expect) }
+      end
+    end
   end
 
 end

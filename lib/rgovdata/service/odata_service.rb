@@ -10,7 +10,8 @@ class RGovData::OdataService < RGovData::Service
 
   # Returns an array of DataSets (keys) for the service
   def dataset_keys
-    @dataset_keys ||= native_instance.classes.keys
+    # @dataset_keys ||= native_instance.classes.keys
+    @dataset_keys ||= native_instance.instance_variable_get(:@collections)
   end
 
   # Returns the native service object if applicable
