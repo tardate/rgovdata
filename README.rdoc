@@ -95,6 +95,18 @@ enforcement or protection.
 * Make sure to add tests for it. This is important so your changes don't get unintentionally broken in a future version.
 * Please try not to mess with the Rakefile, version, gemspec or changelog. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so the mater repository maintainer can cherry-pick around it.
 
+=== Running Tests
+
+RSpec is used for testing, and it is hooked into rake. Note that integration tests are _not_ run by default.
+
+* rake  - just runs unit tests
+* rake spec - same as rake
+* rake spec:integration - only runs integration tests
+* rake spec:all - run all unit and integration tests
+  
+When you do run integration tests, they make live calls on some real services, some of which require authentication.
+Integration tests will use an rgovdata.conf file in the root of the project for configuration.
+
 
 == Copyright
 
