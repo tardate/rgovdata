@@ -18,4 +18,20 @@ describe RGovData::DataSet do
     end
   end
 
+  describe "#records" do
+    subject { dataset.records }
+    context "with only a single result from load_records" do
+      before {
+        dataset.stub(:load_records).and_return('single result')
+      }
+      it { should be_a(Array) }
+    end
+    context "with only a single result from load_records" do
+      before {
+        dataset.stub(:load_records).and_return(['result 1','result 2'])
+      }
+      it { should be_a(Array) }
+    end
+  end
+
 end

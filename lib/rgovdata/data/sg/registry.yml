@@ -1,23 +1,49 @@
 --- !ruby/object:RGovData::ServiceListing
 realm: :sg
+key: chlkboard
+name: Chlkboard
+description: Information and promotion of local businesses
+keywords: "F&B, retail"
+publisher: Chlkboard
+info_uri: http://projectnimbus.org/2010/07/17/datasets-chlkboard/
+license:
+uri: https://api.projectnimbus.org/chlkboardodataservice.svc
+type: :odata
+credentialset: projectnimbus
+--- !ruby/object:RGovData::ServiceListing
+realm: :sg
+key: co
+name: Cinema Online
+description: Movie times and locations in Singapore
+keywords: movie, cinema
+publisher: Cinema Online
+info_uri: http://projectnimbus.org/2010/04/12/datasets-cinema-online-co/
+license:
+uri: https://api.projectnimbus.org/coodataservice.svc
+type: :odata
+credentialset: projectnimbus
+--- !ruby/object:RGovData::ServiceListing
+realm: :sg
+key: hgw
+name: HungryGoWhere
+description: Best food, restaurants, bars, and pubs in Singapore, Kuala Lumpur and Hong Kong
+keywords: food, makan
+publisher: HungryGoWhere
+info_uri: http://projectnimbus.org/2010/04/11/datasets-hungrygowhere-hgw/
+license:
+uri: https://api.projectnimbus.org/hgwodataservice.svc
+type: :odata
+credentialset: projectnimbus
+--- !ruby/object:RGovData::ServiceListing
+realm: :sg
 key: lta
 name: Traffic and Road Conditions
 description: Traffic and Road Conditions in Singapore
 keywords: road, traffic, incidents, parking
 publisher: Singapore Land Transport Authority
+info_uri: http://projectnimbus.org/2010/04/05/datasets-singapore-land-transport-authority-lta/
 license:
 uri: https://api.projectnimbus.org/ltaodataservice.svc
-type: :odata
-credentialset: projectnimbus
---- !ruby/object:RGovData::ServiceListing
-realm: :sg
-key: nlb
-name: Libraries
-description: Information about the Public Libraries in Singapore and their collections
-keywords: library, book
-publisher: National Library Board Singapore (NLB)
-license:
-uri: https://api.projectnimbus.org/nlbodataservice.svc
 type: :odata
 credentialset: projectnimbus
 --- !ruby/object:RGovData::ServiceListing
@@ -27,8 +53,21 @@ name: Meteorological services
 description: Meteorological services in Singapore
 keywords: weather
 publisher: Singapore National Environment Agency
+info_uri: http://projectnimbus.org/2010/04/11/datasets-singapore-national-environment-agency-nea/
 license:
 uri: https://api.projectnimbus.org/neaodataservice.svc
+type: :odata
+credentialset: projectnimbus
+--- !ruby/object:RGovData::ServiceListing
+realm: :sg
+key: nlb
+name: Libraries
+description: Information about the Public Libraries in Singapore and their collections
+keywords: library, book
+publisher: National Library Board Singapore (NLB)
+info_uri: http://projectnimbus.org/2010/04/11/datasets-national-library-board-nlb/
+license:
+uri: https://api.projectnimbus.org/nlbodataservice.svc
 type: :odata
 credentialset: projectnimbus
 --- !ruby/object:RGovData::ServiceListing
@@ -38,6 +77,7 @@ name: ShowNearBy
 description: locations of persons, points-of-interest, and activities
 keywords: location, bus stop, ATM, clinic, shops, AED
 publisher: ShowNearBy
+info_uri: http://projectnimbus.org/2010/04/12/datasets-shownearby-snb/
 license:
 uri: https://api.projectnimbus.org/snbodataservice.svc
 type: :odata
@@ -49,8 +89,45 @@ name: Events and Places
 description: Tourism related events and places
 keywords: event, hotel, places of interest
 publisher: Singapore Tourism Board
+info_uri: http://projectnimbus.org/2010/04/12/datasets-singapore-tourism-board-stb/
 license:
 uri: https://api.projectnimbus.org/stbodataservice.svc
+type: :odata
+credentialset: projectnimbus
+--- !ruby/object:RGovData::ServiceListing
+realm: :sg
+key: sp
+name: Singapore Post
+description: Post Office and SAM locations
+keywords: post, location
+publisher: Singapore Post
+info_uri: http://projectnimbus.org/2010/04/12/datasets-singapore-post-sp/
+license:
+uri: https://api.projectnimbus.org/spodataservice.svc
+type: :odata
+credentialset: projectnimbus
+--- !ruby/object:RGovData::ServiceListing
+realm: :sg
+key: usr
+name: User Contributed Content
+description: User Contributed Datasets is part of the community driven efforts to provide interesting datasets
+keywords: location
+publisher: ProjectNimbus
+info_uri: http://projectnimbus.org/2010/10/04/datasets-user-contributed-content-usr/
+license:
+uri: https://api.projectnimbus.org/usrodataservice.svc
+type: :odata
+credentialset: projectnimbus
+--- !ruby/object:RGovData::ServiceListing
+realm: :sg
+key: places
+name: Places
+description: Places.sg aggregates the flow of your information to multiple web and mobile sites, so that when you upload your information and/or promotions in one place, it gets quickly syndicated to many digital properties
+keywords: location
+publisher:  Places.sg
+info_uri: http://projectnimbus.org/2010/10/18/datasets-places-sg/
+license:
+uri: https://api.projectnimbus.org/placesodataservice.svc
 type: :odata
 credentialset: projectnimbus
 --- !ruby/object:RGovData::ServiceListing
@@ -60,6 +137,7 @@ name: Air Cargo Discharged
 description: Air Cargo Discharged - Total by Region and Selected Country of Origin
 keywords: Transportation and Storage
 publisher: Civil Aviation Authority of Singapore
+info_uri:
 license:
 uri: http://data.gov.sg/common/download.aspx?id=13008&rid=1805010000000004396B&filetype=csv
 type: :file

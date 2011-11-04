@@ -60,9 +60,9 @@ class RGovData::DataSet
   # If +reload+ is true, it re-initializes and re-runs the query
   def records(reload = false)
     @records = if reload
-      load_records
+      Array(load_records)
     else
-      @records || load_records
+      @records || Array(load_records)
     end
   end
 
