@@ -24,7 +24,7 @@ describe RGovData::DataSet do
       before {
         dataset.stub(:load_records).and_return('single result')
       }
-      it { should be_a(Array) }
+      it { should eql('single result') }
     end
     context "with only a single result from load_records" do
       before {

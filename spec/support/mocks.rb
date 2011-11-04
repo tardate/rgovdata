@@ -1,8 +1,11 @@
 require 'pathname'
 
 module MocksHelper
+  def mock_file_path(key)
+    Pathname.new(File.dirname(__FILE__)).join('..','fixtures',key).to_s
+  end
   def mock_text(key)
-    IO.read("#{File.dirname(__FILE__)}/../fixtures/#{key}")
+    IO.read(mock_file_path(key))
   end
   def mock_xml(key)
     Nokogiri::XML(mock_text(key))

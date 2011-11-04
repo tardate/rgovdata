@@ -30,6 +30,7 @@ class RGovData::DataSet
   def realm           ; service.realm               ; end
   def service_key     ; service.service_key         ; end
   def dataset_key     ; options.dataset_key         ; end
+  def uri             ; service.uri                 ; end
   # Returns the record limit currently imposed
   def limit           ; options.limit               ; end
   # Set the record limit to +value+
@@ -60,12 +61,18 @@ class RGovData::DataSet
   # If +reload+ is true, it re-initializes and re-runs the query
   def records(reload = false)
     @records = if reload
-      Array(load_records)
+      load_records
     else
-      @records || Array(load_records)
+      @records || load_records
     end
   end
 
+  # Returns the value of the named +attribute+ from a recordset +row+
+  # Purpose is to encapsulate differences in addressing attribute values
+  def attribute_value(row,attribute)
+    row.send(attribute)
+  end
+  
   # Loads the native dataset
   # => override this in specific dataset classes as required
   def load_instance

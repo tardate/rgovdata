@@ -64,8 +64,11 @@ class RGovData::Service
   end
   
   # Returns an array of DataSets for the service
-  # => needs to be overridden for each service type
+  # => may need to be overridden for a specific service type
   def datasets
+    dataset_class = "RGovData::#{type.to_s.capitalize}DataSet".constantize
+    @datasets ||= dataset_class.load_datasets(self)
+  rescue
     []
   end
 

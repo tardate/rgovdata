@@ -48,6 +48,7 @@ module RGovData::Dn
   # Returns array of attributes that describe the records of the specific entity
   # By default, it is nil (meaning indeterminate)
   def attributes
+    @attributes
   end
 
   # Generic interface to return the currently applicable record set

@@ -3,11 +3,6 @@ require 'ruby_odata'
 # This is the catalog class that describes an OData Service
 class RGovData::OdataService < RGovData::Service
 
-  # # Returns an array of DataSets (names) for the service
-  def datasets
-    @datasets ||= RGovData::OdataDataSet.load_datasets(self)
-  end
-
   # Returns an array of DataSets (keys) for the service
   def dataset_keys
     # @dataset_keys ||= native_instance.classes.keys

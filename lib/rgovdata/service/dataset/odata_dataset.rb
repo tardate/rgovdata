@@ -25,7 +25,7 @@ class RGovData::OdataDataSet < RGovData::DataSet
   def load_records
     native_instance(true)
     native_instance.top(limit) if limit.present?
-    service.native_instance.execute
+    Array(service.native_instance.execute)
   end
   protected :load_records
 end

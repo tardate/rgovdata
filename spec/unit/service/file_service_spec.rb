@@ -2,18 +2,24 @@ require 'spec_helper'
 
 describe RGovData::FileService do
 
-  let(:credentialset) { 'basic' }
-  let(:service) { RGovData::CsvService.new('uri','csv','get',credentialset) }
+  let(:dataset_key) { 'file' }
+  let(:sample_file) { mock_file_path('sample.csv') }
+  let(:service) { RGovData::FileService.new({:uri=>sample_file,:type=>'file'}) }
 
-  before {
-    # These tests won't call on a real service
-  }
+
+  describe "#dataset_keys" do
+    let(:expect) { [dataset_key] }
+    subject { service.dataset_keys }
+    it { should eql(expect) }
+  end
 
   describe "#native_instance" do
   end
 
   describe "#datasets" do
-    
+    subject { service.datasets }
+    it { should be_a(Array) }
+    its(:first) { should be_a(RGovData::FileDataSet) }
   end
 
 end

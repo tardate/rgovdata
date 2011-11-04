@@ -5,13 +5,13 @@ It aims to make consuming government data sets as easy as "gem install rgovdata"
 letting you focus on what you are trying to achieve with the data, and happily
 ignore all the messy underlying details of transport protocols, authentication and so on.
 
-It can be used as a command line tool, a library of ruby projects,
+It can be used as a command line tool, a library for ruby projects,
 and/or a library for rails projects.
 The problem it is attempting to solve is
 
 More information is available at
 link:http://rgovdata.com
-along with some examples of it's use.
+along with examples of it's use.
 
 Taking on the challenge of providing access to "all government data" is a somewhat quixotic quest
 for a single individual, but it could work with a community to support it!
@@ -46,12 +46,33 @@ Note that the current version is a very early implementation. It is likely that 
 and capabilities may be refactored or changed in subsequent versions, and not necessarily preserving
 backward compatibility.
 
+
 == Getting Started
 
-For more details, see
+For more details and examples, see
 link:http://rgovdata.com
 
-The basics:
+
+=== Installation - Basic Gem and Command Line Usage
+
+Make sure you have a working ruby installation, then simply:
+  $ gem install rgovdata
+
+When the installation is complete, try the command line:
+  $ rgd
+  rgovdata client v0.1.0. Type 'help' for info...
+  rgd://sg>
+
+
+=== Installation - Rails
+
+Add rgovdata to your Gemfile and run bundler:
+
+  $ cat Gemfile
+  ...
+  gem 'rgovdata', '~> 0.1.0'
+  ...
+  $ bundle install
 
 
 == Data Encumberance
@@ -63,6 +84,7 @@ It is up to *you* to ensure that your use of data complies with all the applicab
 RGovData simply provides a mechanism for getting the data, and explicitly does not provide any rights
 enforcement or protection.
 
+
 == Contributing to RGovData
  
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
@@ -72,6 +94,7 @@ enforcement or protection.
 * Commit and push until you are happy with your contribution
 * Make sure to add tests for it. This is important so your changes don't get unintentionally broken in a future version.
 * Please try not to mess with the Rakefile, version, gemspec or changelog. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so the mater repository maintainer can cherry-pick around it.
+
 
 == Copyright
 

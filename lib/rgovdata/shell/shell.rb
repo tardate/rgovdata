@@ -99,7 +99,6 @@ They can also be passed on the command line:
   # Print welcome message
   def welcome(*args)
     puts <<-EOS
-
 rgovdata client v#{RGovData::Version::STRING}. Type 'help' for info...
     EOS
   end
