@@ -27,8 +27,8 @@ describe RGovData::Service do
     it { should eql(service) }
   end
 
-  describe "#attributes" do
-    subject { service.attributes }
+  describe "#meta_attributes" do
+    subject { service.meta_attributes }
     it { should be_a(Array) }
   end
 
@@ -37,7 +37,7 @@ describe RGovData::Service do
     let(:keys) { service.initialization_hash.keys }
     it { should be_a(Hash) }
     it "should contain members for all attributes" do
-      service.attributes.each do |attribute|
+      service.meta_attributes.each do |attribute|
         keys.should include(attribute)
       end
     end

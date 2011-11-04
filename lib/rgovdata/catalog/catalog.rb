@@ -66,11 +66,13 @@ class RGovData::Catalog
     if realm.present?
       services
     else
+      # TODO: this should probably return an array of RGovData::Catalog for each realm
       realms
     end
   end
 
   # Clears current state
+  # TODO: move to Dn
   def clear
     @realm = @services = nil
   end

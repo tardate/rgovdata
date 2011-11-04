@@ -16,7 +16,7 @@ name: Libraries
 description: List and location of Public Libraries in Singapore
 keywords: library
 license:
-uri: https://api.projectnimbus.org/nlbodataservice.svc
+uri: https://api.projectnimbus.org/ltaodataservice.svc
 type: :odata
 transport: :odata
 credentialset: projectnimbus

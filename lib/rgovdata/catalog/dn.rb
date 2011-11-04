@@ -24,6 +24,32 @@ module RGovData::Dn
     "#{id} [#{self.class.name}]"
   end
 
+  # Returns array of attributes that describe the specific entity
+  # By default, guesses based on instance variables
+  def meta_attributes
+    a = [:id]
+    instance_variables.each do |v|
+      n = v.to_s.gsub('@','').to_sym
+      a << n if self.respond_to?(n)
+    end
+    a
+  end
+
+  # Returns a hash that fully describes this service and can be used as a parameter to +new+
+  # By default, returns a hash based on meta_attributes
+  def initialization_hash
+    h = {}
+    meta_attributes.each do |attribute|
+      h.merge!(attribute => self.send(attribute))
+    end
+    h
+  end
+
+  # Returns array of attributes that describe the records of the specific entity
+  # By default, it is nil (meaning indeterminate)
+  def attributes
+  end
+
   # Generic interface to return the currently applicable record set
   def records
     if defined? datasets

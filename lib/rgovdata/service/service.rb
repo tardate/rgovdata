@@ -5,8 +5,7 @@ require 'ostruct'
 class RGovData::Service
   include RGovData::CommonConfig
   include RGovData::Dn
-  ATTRIBUTES = [:realm,:service_key,:uri,:type,:transport,:credentialset]
-
+  
   attr_accessor :options
   attr_reader :native_instance    # the underlying native service object (if applicable)
 
@@ -52,17 +51,10 @@ class RGovData::Service
   def transport     ; options.transport     ; end
   def credentialset ; options.credentialset ; end
 
-  def attributes
-    ATTRIBUTES
-  end
-
-  # Returns a hash that fully describes this service and can be used as a parameter to +new+
-  def initialization_hash
-    h = {}
-    attributes.each do |attribute|
-      h.merge!(attribute => self.send(attribute))
-    end
-    h
+  # Returns array of attributes that describe the specific entity
+  # => overrides RGovData::Dn.meta_attributes
+  def meta_attributes
+    [:id,:realm,:service_key,:uri,:type,:transport,:credentialset]
   end
 
   # Returns the native service object if applicable
@@ -71,15 +63,22 @@ class RGovData::Service
     @native_instance || self
   end
   
-  # Returns an array of DataSets (names) for the service
+  # Returns an array of DataSets for the service
+  # => needs to be overridden for each service type
   def datasets
+    []
+  end
+
+  # Returns an array of DataSets (keys) for the service
+  # => needs to be overridden for each service type
+  def dataset_keys
     []
   end
 
   # Returns the dataset(s) matching +key+
   def get_dataset(key)
     return nil unless datasets && !datasets.empty?
-    matches = datasets.select {|s| s =~ /#{key}/}
+    matches = datasets.select {|s| s.dataset_key =~ /#{key}/}
     matches.count == 1 ? matches.first : matches
   end
   # Returns the first dataset matching +key+

@@ -4,8 +4,14 @@ require 'ruby_odata'
 class RGovData::OdataService < RGovData::Service
 
   # # Returns an array of DataSets (names) for the service
-  # def datasets
-  # end
+  def datasets
+    @datasets ||= RGovData::OdataDataSet.load_datasets(self)
+  end
+
+  # Returns an array of DataSets (keys) for the service
+  def dataset_keys
+    @dataset_keys ||= native_instance.classes.keys
+  end
 
   # Returns the native service object if applicable
   # By default, returns self
@@ -13,19 +19,21 @@ class RGovData::OdataService < RGovData::Service
     @native_instance ||= load_service
   end
 
+  # Identifies, loads, and returns the native service instance
   def load_service
+    clear
     # currently forcing SSL verification off (seems to be required for projectnimbus)
     # TODO: this should probably be a setting in the ServiceListing
     rest_options = {:verify_ssl=>false}
-    if credentialset == 'basic'
-      credentials = config.credentialsets['basic']
+    if credentialset && credentialset != 'projectnimbus'
+      credentials = config.credentialsets[credentialset]
       # merge basic auth
       rest_options.merge!({ :username => credentials['username'], :password => credentials['password'] })
     end
     svc = OData::Service.new(uri, rest_options)
-    if credentialset == 'projectnimbus'
-      credentials = config.credentialsets['projectnimbus']
-      # some special funky to insert headers for projectnimbus authentication
+    if credentialset && credentialset == 'projectnimbus'
+      credentials = config.credentialsets[credentialset]
+      # some special funk to insert headers for projectnimbus authentication
       actual_rest_options = svc.instance_variable_get(:@rest_options)
       rest_options = actual_rest_options.merge({:headers => {
         'AccountKey' => credentials['AccountKey'], 'UniqueUserID' => credentials['UniqueUserID']
@@ -36,5 +44,11 @@ class RGovData::OdataService < RGovData::Service
   end
   protected :load_service
 
+  # Clears current state
+  # TODO: move to Dn?
+  def clear
+    @datasets = @dataset_keys = @native_instance = nil
+  end
+  protected :clear
 end
 
