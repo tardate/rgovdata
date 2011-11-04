@@ -19,10 +19,19 @@ The library is open sourced under an MIT license, and the project hosted on
 {GitHub}[https://github.com/tardate/rgovdata]. If you'd like to get involved, see the
 "Contributing to RGovData" section below.
 
+
 == Requirements
 
 * ruby 1.9
 * optional: rails 3.0.x
+
+
+== Resources
+
+* {RGovData gem on GitHub}[https://github.com/tardate/rgovdata]
+* {RGovData site on GitHub}[https://github.com/tardate/rgovdata_site]
+* {RGovData live site}[http://rgovdata.com]
+
 
 == Objectives and Implementation Status
 
