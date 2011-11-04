@@ -49,8 +49,8 @@ describe RGovData::Service do
   end
 
   describe "#datasets" do
-    let(:mock_dataset_a) { 'mock_dataset_a' }
-    let(:mock_dataset_b) { 'mock_dataset_b' }
+    let(:mock_dataset_a) { RGovData::DataSet.new({:dataset_key=>'mock_dataset_a'},service) }
+    let(:mock_dataset_b) { RGovData::DataSet.new({:dataset_key=>'mock_dataset_b'},service) }
     let(:mock_datasets) { [mock_dataset_a,mock_dataset_b] }
     before {
       service.stub(:datasets).and_return(mock_datasets)
