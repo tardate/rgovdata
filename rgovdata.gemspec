@@ -30,6 +30,7 @@ Gem::Specification.new do |s|
     "bin/rgd",
     "examples/all_quakes.rb",
     "examples/arbitrary_data.rb",
+    "examples/catalog_traversal.rb",
     "examples/earthquakes.rb",
     "lib/rgovdata.rb",
     "lib/rgovdata/catalog.rb",

@@ -15,7 +15,7 @@ class RGovData::ServiceListing
 
   include RGovData::Dn
 
-  # Returns the collection of services for this listing
+  # Returns the service for this listing
   def service
     @service ||= RGovData::Service.get_instance(self)
   end
@@ -28,6 +28,7 @@ class RGovData::ServiceListing
   def datasets
     service.try(:datasets)
   end
+  alias_method :records, :datasets
 
   # Returns the dataset(s) matching +key+
   # => delegate to service

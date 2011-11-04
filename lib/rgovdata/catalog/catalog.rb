@@ -33,7 +33,7 @@ class RGovData::Catalog
   # Returns available realms
   def realms
     # TODO: currently hard-coded
-    [:sg,:us]
+    [:sg,:us].map{|realm| self.class.new(realm) }
   end
 
   # Returns an array of ServiceListings for the current realm
@@ -66,7 +66,6 @@ class RGovData::Catalog
     if realm.present?
       services
     else
-      # TODO: this should probably return an array of RGovData::Catalog for each realm
       realms
     end
   end
