@@ -1,2 +1,7 @@
 0.1.0 Initial Release
 =====================
+* internal registry - limited set of SG and US resources
+* support for OData, csv, and generic text file sources
+* basic command line client
+* rails-compatible (see rgovdata.com site)
+* ruby script examples
