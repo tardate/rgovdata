@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Paul Gallagher"]
-  s.date = %q{2011-11-03}
+  s.date = %q{2011-11-04}
   s.default_executable = %q{rgd}
   s.description = %q{Consuming government-published data in a ruby or rails application shouldn't require a PhD}
   s.email = %q{gallagher.paul@gmail.com}
@@ -42,12 +42,13 @@ Gem::Specification.new do |s|
     "lib/rgovdata/data/template.rb",
     "lib/rgovdata/data/us/registry.yml",
     "lib/rgovdata/service.rb",
-    "lib/rgovdata/service/csv_dataset.rb",
     "lib/rgovdata/service/csv_service.rb",
-    "lib/rgovdata/service/dataset.rb",
+    "lib/rgovdata/service/dataset/csv_dataset.rb",
+    "lib/rgovdata/service/dataset/dataset.rb",
+    "lib/rgovdata/service/dataset/file_dataset.rb",
+    "lib/rgovdata/service/dataset/odata_dataset.rb",
     "lib/rgovdata/service/file_service.rb",
     "lib/rgovdata/service/listing.rb",
-    "lib/rgovdata/service/odata_dataset.rb",
     "lib/rgovdata/service/odata_service.rb",
     "lib/rgovdata/service/service.rb",
     "lib/rgovdata/shell/shell.rb",
@@ -65,6 +66,7 @@ Gem::Specification.new do |s|
     "spec/unit/data/template_spec.rb",
     "spec/unit/service/file_service_spec.rb",
     "spec/unit/service/listing_spec.rb",
+    "spec/unit/service/odata_dataset_spec.rb",
     "spec/unit/service/odata_service_spec.rb",
     "spec/unit/service/service_spec.rb",
     "spec/unit/shell/shell_spec.rb"
