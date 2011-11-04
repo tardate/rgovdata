@@ -118,18 +118,20 @@ license:
 uri: https://api.projectnimbus.org/usrodataservice.svc
 type: :odata
 credentialset: projectnimbus
---- !ruby/object:RGovData::ServiceListing
-realm: :sg
-key: places
-name: Places
-description: Places.sg aggregates the flow of your information to multiple web and mobile sites, so that when you upload your information and/or promotions in one place, it gets quickly syndicated to many digital properties
-keywords: location
-publisher:  Places.sg
-info_uri: http://projectnimbus.org/2010/10/18/datasets-places-sg/
-license:
-uri: https://api.projectnimbus.org/placesodataservice.svc
-type: :odata
-credentialset: projectnimbus
+# --- !ruby/object:RGovData::ServiceListing
+## Places currently excluded wince the metadata doesn't fully describe the mandatory parameters required
+## for the Detail and Search collections. Leaving places out of the registry until this is sorted.
+# realm: :sg
+# key: places
+# name: Places
+# description: Places.sg aggregates the flow of your information to multiple web and mobile sites, so that when you upload your information and/or promotions in one place, it gets quickly syndicated to many digital properties
+# keywords: location
+# publisher:  Places.sg
+# info_uri: http://projectnimbus.org/2010/10/18/datasets-places-sg/
+# license:
+# uri: https://api.projectnimbus.org/placesodataservice.svc
+# type: :odata
+# credentialset: projectnimbus
 --- !ruby/object:RGovData::ServiceListing
 realm: :sg
 key: caas_air_cargo_discharged
