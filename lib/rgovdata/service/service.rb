@@ -15,7 +15,6 @@ class RGovData::Service
     # If +options+ is a hash, it requires the following members:
     # +uri+
     # +type+
-    # +transport+
     # +credentialset+
     def get_instance(options={})
       type = (options.class <= RGovData::ServiceListing) ? options.type : options[:type]

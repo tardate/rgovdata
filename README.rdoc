@@ -16,7 +16,7 @@ along with examples of it's use.
 Taking on the challenge of providing access to "all government data" is a somewhat quixotic quest
 for a single individual, but it could work with a community to support it!
 The library is open sourced under an MIT license, and the project hosted on
-{github}[https://github.com/tardate/rgovdata]. If you'd like to get involved, see the
+{GitHub}[https://github.com/tardate/rgovdata]. If you'd like to get involved, see the
 "Contributing to RGovData" section below.
 
 == Requirements

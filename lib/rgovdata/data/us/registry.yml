@@ -9,5 +9,4 @@ license: public
 info_uri: http://explore.data.gov/Geography-and-Environment/Worldwide-M1-Earthquakes-Past-7-Days/7tag-iwnu
 uri: http://earthquake.usgs.gov/earthquakes/catalogs/eqs7day-M1.txt
 type: :csv
-transport: :get
 
