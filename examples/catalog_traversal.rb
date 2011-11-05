@@ -2,6 +2,8 @@
 require 'rgovdata'
 
 # This demonstrates the essential process of traversing the RGovData catalog
+# Note: this example probably requires valid projectnimbus credentials in your rgovdata.conf file
+# since it will blindly traverse the tree and may hit a projectnimbus service
 
 # This gets the root catalog
 root_catalog = RGovData::Catalog.new(nil)
