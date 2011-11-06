@@ -34,11 +34,7 @@ describe RGovData::Catalog do
   describe "#realms" do
     subject { RGovData::Catalog.new(nil).realms }
     it { should be_a(Array) }
-    it "should include supported realms" do
-      subject.each do |realm_cat|
-        supported_realms.should include(realm_cat.realm)
-      end
-    end
+    its(:first) { should be_a(RGovData::Catalog) }
   end
 
   describe "#to_s" do

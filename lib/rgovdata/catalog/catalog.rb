@@ -1,16 +1,21 @@
+# RGovData::Catalog is the main entry point for service discovery
+#
 class RGovData::Catalog
   attr_accessor :realm
   include RGovData::Dn
 
   class << self
     # Returns the object specified by the +key+
+    #
     # Key specification:
-    # //<realm>/<service-key>/<data-set-name>
+    # * //<realm>/<service-key>/<data-set-name>
+    #
     # All key components are optional - you will get the best matching object for the key spec
-    # //sg - will return RGovData::Catalog for realm=:sg
-    # //sg/nlb - will return RGovData::ServiceListing for the nlb service in SG
-    # /nlb - will return RGovData::ServiceListing for the nlb service in SG (assuming SG is the default realm)
-    # //sg/nlb/Library - will return RGovData::OdataService for the nlb Library service in SG
+    # * //sg - will return RGovData::Catalog for realm=:sg
+    # * //sg/nlb - will return RGovData::ServiceListing for the nlb service in SG
+    # * /nlb - will return RGovData::ServiceListing for the nlb service in SG (assuming SG is the default realm)
+    # * //sg/nlb/Library - will return RGovData::OdataService for the nlb Library service in SG
+    #
     def get(key)
       key ||= '//'
       key.gsub!(':','/') # handle alternate encoding
@@ -32,8 +37,7 @@ class RGovData::Catalog
 
   # Returns available realms
   def realms
-    # TODO: currently hard-coded
-    [:sg,:us].map{|realm| self.class.new(realm) }
+    RGovData::RegistryStrategy.available_realms.map { |realm| self.class.new(realm) }
   end
 
   # Returns an array of ServiceListings for the current realm
@@ -44,7 +48,7 @@ class RGovData::Catalog
   # Returns the service(s) matching +key+
   def get_service(key)
     return nil unless services && !services.empty?
-    matches = services.select {|s| s.key =~ /#{key}/}
+    matches = services.select { |s| s.key =~ /#{key}/}
     matches.count == 1 ? matches.first : matches
   end
 
@@ -54,14 +58,14 @@ class RGovData::Catalog
     @realm = value
   end
 
-  # Returns the registry strategy class for the current realm
+  # Returns the registry strategy instance for the current realm
   def registry_strategy
-    RGovData::RegistryStrategy.instance_for_realm(realm)
+    RGovData::RegistryStrategy.get_instance(realm)
   end
   protected :registry_strategy
   
   # Generic interface to return the currently applicable record set
-  # => overrides RGovData::Dn.records
+  # * overrides RGovData::Dn#records
   def records
     if realm.present?
       services

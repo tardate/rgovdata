@@ -1,3 +1,10 @@
+# The InternalRegistry strategy works with file-based registries
+# of services built-in to the gem ( in lib/rgovdata/data)
+#
+# This only meant to be a stop-gap and final fallback mechanism,
+# and used to bootstrap rgovdata in the absence of external directory
+# services.
+#
 class RGovData::InternalRegistry < RGovData::RegistryStrategy
 
   # Returns the list of services for the realm
