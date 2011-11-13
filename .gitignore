@@ -1,5 +1,5 @@
 # exclude conf files in the project root
-*.conf
+/*.conf
 
 # rcov generated
 coverage
