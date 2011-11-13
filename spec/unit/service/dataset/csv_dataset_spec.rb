@@ -11,9 +11,9 @@ describe RGovData::CsvDataSet do
   let(:service) { RGovData::CsvService.new({:uri=>sample_file,:type=>'csv'}) }
   let(:dataset) { RGovData::CsvDataSet.new({:dataset_key=>dataset_key},service) }
 
-  describe "#native_dataset_key" do
+  describe "#key" do
     let(:expect) { dataset_key }
-    subject { dataset.native_dataset_key }
+    subject { dataset.key }
     it { should eql(expect) }
   end
 

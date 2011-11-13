@@ -4,20 +4,23 @@ require 'csv'
 class RGovData::CsvDataSet < RGovData::FileDataSet
 
   # Returns array of attributes that describe the records of the specific entity
-  # => overrides RGovData::Dn.attributes
+  #
+  # Overrides RGovData::CatalogItem.attributes
   def attributes
     records unless @attributes # forces a load
     @attributes
   end
 
   # Returns the value of the named +attribute+ from a recordset +row+
-  # => overrides RGovData::DataSet.attribute_value
+  #
+  # Overrides RGovData::DataSet.attribute_value
   def attribute_value(row,attribute)
     row[attribute.to_s]
   end
 
   # Loads the native dataset (URI or File)
-  # => overrides RGovData::DataSet.load_instance
+  #
+  # Overrides RGovData::DataSet.load_instance
   def load_instance
     if uri =~ /^.+:\/\//
       URI.parse( uri )
@@ -28,7 +31,8 @@ class RGovData::CsvDataSet < RGovData::FileDataSet
   protected :load_instance
 
   # Loads the native record set
-  # => overrides RGovData::DataSet.load_records
+  #
+  # Overrides RGovData::DataSet.load_records
   def load_records
     csv = CSV.new(open(native_instance),{:headers=>:first_row}).read
     @attributes = csv.headers

@@ -14,9 +14,9 @@ describe RGovData::OdataDataSet do
     RGovData::Config.instance.load_default_config
   }
 
-  describe "#native_dataset_key" do
+  describe "#key" do
     let(:expect) { 'Test' }
-    subject { dataset.native_dataset_key }
+    subject { dataset.key }
     it { should eql(expect) }
   end
 

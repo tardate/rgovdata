@@ -13,35 +13,20 @@ class RGovData::ServiceListing
   attr_accessor :type          # service type [:odata,:csv,:file]
   attr_accessor :credentialset # name of the credential set required
 
-  include RGovData::Dn
+  include RGovData::CatalogItem
 
-  # Returns the service for this listing
+  # Returns the service for this listing.
   def service
     @service ||= RGovData::Service.get_instance(self)
   end
 
-  # Returns the service key
+  # Returns the service key.
   alias_method :service_key, :key
 
-  # Returns an array of DataSets for the service
-  # => delegate to service
+  # Returns an array of DataSets for the service.
+  # Delegates to service
   def datasets
     service.try(:datasets)
   end
-  alias_method :records, :datasets
-
-  # Returns the dataset(s) matching +key+
-  # => delegate to service
-  def get_dataset(key)
-    service.try(:get_dataset,key)
-  end
-  # Returns the first dataset matching +key+
-  # => delegate to service
-  def find(id)
-    service.try(:find,id)
-  end
-  # Alias for find
-  alias_method :find_by_id, :find
-  
 
 end

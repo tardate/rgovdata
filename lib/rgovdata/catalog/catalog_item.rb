@@ -1,6 +1,7 @@
 # This module defines the basic naming interface for catalog objects
 # Override these methods as required
-module RGovData::Dn
+module RGovData::CatalogItem
+  include Enumerable
   
   # Returns the human-readable unique id
   def id
@@ -58,6 +59,33 @@ module RGovData::Dn
     else
       []
     end
+  end
+
+  # Implements Enumerable#each
+  def each
+    records.each { |item| yield item }
+  end
+  
+  # Returns indexed elements from the collection
+  def [](*args)
+    records[*args]
+  end
+  
+  # Equality based on ID
+  def ==(other)
+    self.id == other.id
+  end
+  alias_method :eql?, :==
+
+
+  # Returns the first record matching +key+
+  def find_by_key(key)
+    find { |r| r.key.to_s =~ /#{key}/}
+  end
+
+  # Returns all records matching +key+
+  def find_all_by_key(key)
+    select { |r| r.key.to_s =~ /#{key}/}
   end
 
 end

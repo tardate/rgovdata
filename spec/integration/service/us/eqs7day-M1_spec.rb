@@ -32,8 +32,8 @@ describe "Worldwide M1+ Earthquakes" do
       end
     end
 
-    describe "#find" do
-      let(:dataset) { service_listing.find(dataset_key) }
+    describe "#find_by_key" do
+      let(:dataset) { service_listing.find_by_key(dataset_key) }
       subject { dataset }
       it { should be_a(RGovData::CsvDataSet) }
       describe "#attributes" do

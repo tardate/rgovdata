@@ -2,7 +2,8 @@
 class RGovData::FileService < RGovData::Service
 
   # Returns an array of DataSets (keys) for the service
-  # => overrides RGovData::Service.dataset_keys
+  #
+  # Overrides RGovData::Service#dataset_keys
   def dataset_keys
     [type]
   end

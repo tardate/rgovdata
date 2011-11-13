@@ -3,19 +3,18 @@ require 'ruby_odata'
 # This is the catalog class that describes an OData Service
 class RGovData::OdataService < RGovData::Service
 
-  # Returns an array of DataSets (keys) for the service
+  # Returns an array of DataSets (keys) for the service.
   def dataset_keys
-    # @dataset_keys ||= native_instance.classes.keys
     @dataset_keys ||= native_instance.instance_variable_get(:@collections)
   end
 
-  # Returns the native service object if applicable
+  # Returns the native service object if applicable.
   # By default, returns self
   def native_instance
     @native_instance ||= load_service
   end
 
-  # Identifies, loads, and returns the native service instance
+  # Identifies, loads, and returns the native service instance.
   def load_service
     clear
     # currently forcing SSL verification off (seems to be required for projectnimbus)
@@ -40,8 +39,8 @@ class RGovData::OdataService < RGovData::Service
   end
   protected :load_service
 
-  # Clears current state
-  # TODO: move to Dn?
+  # Clears current state.
+  # TODO: move to CatalogItem?
   def clear
     @datasets = @dataset_keys = @native_instance = nil
   end

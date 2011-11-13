@@ -7,7 +7,6 @@ ignore all the messy underlying details of transport protocols, authentication a
 
 It can be used as a command line tool, a library for ruby projects,
 and/or a library for rails projects.
-The problem it is attempting to solve is
 
 More information is available at
 link:http://rgovdata.com

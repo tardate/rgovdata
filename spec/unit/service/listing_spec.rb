@@ -71,23 +71,21 @@ describe RGovData::ServiceListing do
       it { should eql(mock_datasets) }
     end
 
-    describe "#get_dataset" do
-      let(:key) { 'key' }
-      let(:mock_dataset_a) { 'mock_dataset_a' }
-      let(:mock_dataset_b) { 'mock_dataset_b' }
-      let(:mock_dataset) { [mock_dataset_a,mock_dataset_b] }
+    describe "#find_by_key" do
+      let(:key) { 'mock_dataset' }
+      let(:service) { listing.service }
+      let(:mock_dataset_a) { RGovData::DataSet.new({:dataset_key=>'mock_dataset_a'},service) }
+      let(:mock_dataset_b) { RGovData::DataSet.new({:dataset_key=>'mock_dataset_b'},service) }
+      let(:mock_datasets) { [mock_dataset_a,mock_dataset_b] }
       before {
-        RGovData::Service.any_instance.stub(:get_dataset).and_return(mock_dataset)
+        RGovData::Service.any_instance.stub(:datasets).and_return(mock_datasets)
       }
-      subject { listing.get_dataset(key) }
-      it { should eql(mock_dataset) }
-      describe "#find" do
-        subject { listing.find(key) }
-        it { should eql(mock_dataset_a) }
-      end
-      describe "#find_by_id" do
-        subject { listing.find_by_id(key) }
-        it { should eql(mock_dataset_a) }
+      subject { listing.find_by_key(key) }
+      it { should eql(mock_dataset_a) }
+      describe "#find_all_by_key" do
+        subject { listing.find_all_by_key(key) }
+        it { should be_a(Array) }
+        its(:first) { should eql(mock_dataset_a) }
       end
     end
   end

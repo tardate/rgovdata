@@ -1,4 +1,4 @@
-require 'rgovdata/catalog/dn'
+require 'rgovdata/catalog/catalog_item'
 require 'rgovdata/service/listing'
 require 'rgovdata/service/service'
 require 'rgovdata/service/odata_service'

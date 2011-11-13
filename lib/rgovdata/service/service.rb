@@ -4,7 +4,7 @@ require 'ostruct'
 # It encapsulates access to the underlying service implementation
 class RGovData::Service
   include RGovData::CommonConfig
-  include RGovData::Dn
+  include RGovData::CatalogItem
   
   attr_accessor :options
   attr_reader :native_instance    # the underlying native service object (if applicable)
@@ -25,13 +25,11 @@ class RGovData::Service
     end
   end
 
-  # +new+ requires
-  # +options may be a RGovData::ServiceListing or a Hash
-  # If +options+ is a hash, it requires the following members:
-  # +uri+
-  # +type+
-  # +transport+
-  # +credentialset+
+  # +new+ requires +options which may be a RGovData::ServiceListing or a Hash.
+  # If +options+ is a hash, it requires the following members as minimum:
+  # * +uri+
+  # * +type+
+  # * +credentialset+
   def initialize(options)
     @options = if options.is_a?(Hash)
       OpenStruct.new(options)
@@ -51,19 +49,20 @@ class RGovData::Service
   def credentialset ; options.credentialset ; end
 
   # Returns array of attributes that describe the specific entity
-  # => overrides RGovData::Dn.meta_attributes
+  #
+  # Overrides RGovData::CatalogItem#meta_attributes
   def meta_attributes
     [:id,:realm,:service_key,:uri,:type,:transport,:credentialset]
   end
 
-  # Returns the native service object if applicable
-  # By default, returns self
+  # Returns the native service object if applicable.
+  # By default, returns self.
   def native_instance
     @native_instance || self
   end
   
-  # Returns an array of DataSets for the service
-  # => may need to be overridden for a specific service type
+  # Returns an array of DataSets for the service.
+  # May need to be overridden for a specific service type.
   def datasets
     dataset_class = "RGovData::#{type.to_s.capitalize}DataSet".constantize
     @datasets ||= dataset_class.load_datasets(self)
@@ -71,23 +70,10 @@ class RGovData::Service
     []
   end
 
-  # Returns an array of DataSets (keys) for the service
-  # => needs to be overridden for each service type
+  # Returns an array of DataSets (keys) for the service.
+  # Needs to be overridden for each service type.
   def dataset_keys
     []
   end
-
-  # Returns the dataset(s) matching +key+
-  def get_dataset(key)
-    return nil unless datasets && !datasets.empty?
-    matches = datasets.select {|s| s.dataset_key =~ /#{key}/}
-    matches.count == 1 ? matches.first : matches
-  end
-  # Returns the first dataset matching +key+
-  def find(id)
-    Array(get_dataset(id)).first
-  end
-  # Alias for find
-  alias_method :find_by_id, :find
-
+  
 end

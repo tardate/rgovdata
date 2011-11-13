@@ -5,22 +5,25 @@ require 'open-uri'
 # Currently only handles text files
 class RGovData::FileDataSet < RGovData::DataSet
 
-  # Returns array of attributes that describe the records of the specific entity
-  # Generic FileDataSets don't have attributes, returns a single selector for the row
-  # => overrides RGovData::Dn.attributes
+  # Returns array of attributes that describe the records of the specific entity.
+  # Generic FileDataSets don't have attributes, returns a single selector for the row.
+  #
+  # Overrides RGovData::CatalogItem.attributes
   def attributes
     ['row']
   end
 
-  # Returns the value of the named +attribute+ from a recordset +row+
-  # Generic FileDataSets don't have attributes, so always return full row
-  # => overrides RGovData::DataSet.attribute_value
+  # Returns the value of the named +attribute+ from a recordset +row+.
+  # Generic FileDataSets don't have attributes, so always return full row.
+  #
+  # Overrides RGovData::DataSet.attribute_value
   def attribute_value(row,attribute)
     row
   end
 
-  # Loads the native dataset (URI or File)
-  # => overrides RGovData::DataSet.load_instance
+  # Loads the native dataset (URI or File).
+  #
+  # Overrides RGovData::DataSet.load_instance
   def load_instance
     if uri =~ /^.+:\/\//
       URI.parse( uri )
@@ -30,8 +33,9 @@ class RGovData::FileDataSet < RGovData::DataSet
   end
   protected :load_instance
 
-  # Loads the native record set
-  # => overrides RGovData::DataSet.load_records
+  # Loads the native record set.
+  #
+  # Overrides RGovData::DataSet.load_records
   def load_records
     # open(native_instance,"UserAgent" => "Mozilla/5.0")
     strio = StringIO.new(open(native_instance).read)

@@ -2,7 +2,7 @@
 #
 class RGovData::Catalog
   attr_accessor :realm
-  include RGovData::Dn
+  include RGovData::CatalogItem
 
   class << self
     # Returns the object specified by the +key+
@@ -22,9 +22,9 @@ class RGovData::Catalog
       keypart = Regexp.new(/(?:\/\/([^\/]+))?(?:\/([^\/]+))?(?:\/([^\/]+))?/).match(key)
       found = catalog = self.new(keypart[1])
       if keypart[2]
-        found = service = catalog.get_service(keypart[2])
+        found = service = catalog.find_by_key(keypart[2])
         if keypart[3]
-          found = service.get_dataset(keypart[3])
+          found = service.find_by_key(keypart[3])
         end
       end
       found
@@ -45,18 +45,14 @@ class RGovData::Catalog
     @services ||= registry_strategy.load_services
   end
 
-  # Returns the service(s) matching +key+
-  def get_service(key)
-    return nil unless services && !services.empty?
-    matches = services.select { |s| s.key =~ /#{key}/}
-    matches.count == 1 ? matches.first : matches
-  end
-
   # override realm setter to clear state when realm changed
   def realm=(value)
     clear
     @realm = value
   end
+
+  # Alias +key+ to +realm+ for master catalog level items.
+  alias_method :key, :realm
 
   # Returns the registry strategy instance for the current realm
   def registry_strategy
@@ -65,7 +61,8 @@ class RGovData::Catalog
   protected :registry_strategy
   
   # Generic interface to return the currently applicable record set
-  # * overrides RGovData::Dn#records
+  #
+  # Overrides RGovData::CatalogItem#records
   def records
     if realm.present?
       services
@@ -74,8 +71,8 @@ class RGovData::Catalog
     end
   end
 
-  # Clears current state
-  # TODO: move to Dn
+  # Clears current state.
+  # TODO: move to CatalogItem?
   def clear
     @realm = @services = nil
   end

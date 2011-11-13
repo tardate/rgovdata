@@ -64,17 +64,14 @@ describe RGovData::Service do
       it { should eql(mock_datasets) }
     end
 
-    describe "#get_dataset" do
+    describe "#find_by_key" do
       let(:key) { 'mock_dataset' }
-      subject { service.get_dataset(key) }
-      it { should eql(mock_datasets) }
-      describe "#find" do
-        subject { service.find(key) }
-        it { should eql(mock_dataset_a) }
-      end
-      describe "#find_by_id" do
-        subject { service.find_by_id(key) }
-        it { should eql(mock_dataset_a) }
+      subject { service.find_by_key(key) }
+      it { should eql(mock_dataset_a) }
+      describe "#find_all_by_key" do
+        subject { service.find_all_by_key(key) }
+        it { should be_a(Array) }
+        its(:first) { should eql(mock_dataset_a) }
       end
     end
 

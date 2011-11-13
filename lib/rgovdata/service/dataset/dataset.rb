@@ -1,6 +1,6 @@
 # This is the catalog class that describes a generic Service DataSet
 class RGovData::DataSet
-  include RGovData::Dn
+  include RGovData::CatalogItem
   attr_reader :options
   attr_reader :service
   attr_reader :native_service
@@ -38,17 +38,18 @@ class RGovData::DataSet
     options.limit = value
   end
 
-  # Returns array of attributes that describe the specific entity
-  # => overrides RGovData::Dn.meta_attributes
+  # Returns array of attributes that describe the specific entity.
+  #
+  # Overrides RGovData::CatalogItem.meta_attributes
   def meta_attributes
     [:id,:realm,:service_key,:dataset_key]
   end
 
-  # Returns the native dataset key
-  alias_method :native_dataset_key, :dataset_key
+  # Returns the native dataset key.
+  alias_method :key, :dataset_key
 
-  # Returns the native dataset instance
-  # If +reload+ is true, it re-initializes
+  # Returns the native dataset instance.
+  # If +reload+ is true, it re-initializes.
   def native_instance(reload = false)
     @native_instance = if reload
       load_instance
@@ -57,8 +58,8 @@ class RGovData::DataSet
     end
   end
 
-  # Returns the records
-  # If +reload+ is true, it re-initializes and re-runs the query
+  # Returns the records.
+  # If +reload+ is true, it re-initializes and re-runs the query.
   def records(reload = false)
     @records = if reload
       load_records
@@ -67,21 +68,23 @@ class RGovData::DataSet
     end
   end
 
-  # Returns the value of the named +attribute+ from a recordset +row+
-  # Purpose is to encapsulate differences in addressing attribute values
+  # Returns the value of the named +attribute+ from a recordset +row+.
+  # Purpose is to encapsulate differences in addressing attribute values.
   def attribute_value(row,attribute)
     row.send(attribute)
   end
   
-  # Loads the native dataset
-  # => override this in specific dataset classes as required
+  # Loads the native dataset.
+  #
+  # Override this in specific dataset classes as required.
   def load_instance
     nil
   end
   protected :load_instance
 
-  # Loads the native record set
-  # => override this in specific dataset classes as required
+  # Loads the native record set.
+  #
+  # Override this in specific dataset classes as required.
   def load_records
     nil
   end
