@@ -1,4 +1,4 @@
-= RGovData
+= RGovData {<img src="https://secure.travis-ci.org/tardate/rgovdata.png" />}[http://travis-ci.org/tardate/rgovdata]
 
 RGovData is a ruby library for really simple access to government data.
 It aims to make consuming government data sets as easy as "gem install rgovdata",
